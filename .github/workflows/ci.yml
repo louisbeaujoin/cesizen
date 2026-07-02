@@ -28,7 +28,7 @@ jobs:
 
       # Met en cache les dépendances pour accélérer les runs suivants
       - name: Cache des dépendances Composer
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: vendor
           key: composer-${{ hashFiles('composer.lock') }}
