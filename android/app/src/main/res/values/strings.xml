@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CESIZen</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Accueil</string>
+    <string name="nav_breathing">Respiration</string>
+    <string name="nav_information">Informations</string>
+    <string name="nav_profile">Profil</string>
+
+    <!-- Home -->
+    <string name="home_title">CESIZen</string>
+    <string name="home_subtitle">Votre plateforme de santé mentale et gestion du stress</string>
+    <string name="feature_info_title">Informations</string>
+    <string name="feature_info_desc">Accédez à des contenus sur la santé mentale et la prévention du stress.</string>
+    <string name="feature_breathing_title">Exercices de respiration</string>
+    <string name="feature_breathing_desc">Pratiquez la cohérence cardiaque avec des exercices guidés et personnalisables.</string>
+    <string name="feature_account_title">Créer un compte</string>
+    <string name="feature_account_desc">Inscrivez-vous pour accéder à toutes les fonctionnalités et suivre votre progression.</string>
+    <string name="btn_consult">Consulter</string>
+    <string name="btn_start">Commencer</string>
+    <string name="btn_signup">S\'inscrire</string>
+
+    <!-- Breathing -->
+    <string name="breathing_title">Exercices de respiration</string>
+    <string name="breathing_intro">La cohérence cardiaque est une technique de respiration qui aide à réduire le stress et l\'anxiété. Elle s\'articule autour de trois phases : inspiration, apnée (rétention), et expiration.</string>
+    <string name="predefined_methods">Méthodes prédéfinies</string>
+    <string name="custom_exercise">Exercice personnalisé</string>
+    <string name="custom_exercise_intro">Configurez vos propres durées pour l\'exercice de cohérence cardiaque.</string>
+    <string name="inspiration_label">Inspiration (secondes)</string>
+    <string name="apnea_label">Apnée (secondes)</string>
+    <string name="expiration_label">Expiration (secondes)</string>
+    <string name="cycles_label">Nombre de cycles</string>
+    <string name="start">Lancer</string>
+    <string name="start_custom">Lancer l\'exercice personnalisé</string>
+    <string name="stop">Arrêter</string>
+    <string name="restart">Recommencer</string>
+    <string name="ready">Prêt ?</string>
+    <string name="inspire">Inspirez</string>
+    <string name="hold">Retenez</string>
+    <string name="expire">Expirez</string>
+    <string name="finished">Terminé !</string>
+    <string name="stopped">Arrêté</string>
+    <string name="exercise_timing">Inspiration : %1$ds   Apnée : %2$ds   Expiration : %3$ds</string>
+    <string name="exercise_timing_full">Inspiration : %1$ds   Apnée : %2$ds   Expiration : %3$ds   Cycles : %4$d</string>
+    <string name="exercise_cycle_duration">Durée d\'un cycle : %1$ds</string>
+    <string name="cycle_counter">Cycle : %1$d / %2$d</string>
+    <string name="total_duration">Durée totale : %1$ds</string>
+    <string name="invalid_values">Valeurs invalides : inspiration/expiration/cycles entre 1 et 30, apnée entre 0 et 30.</string>
+
+    <!-- Information -->
+    <string name="info_title">Informations sur la santé mentale</string>
+    <string name="info_empty">Aucune information disponible pour le moment.</string>
+    <string name="loading">Chargement…</string>
+    <string name="error_network">Erreur réseau. Vérifiez votre connexion.</string>
+
+    <!-- Auth -->
+    <string name="login_title">Connexion</string>
+    <string name="register_title">Inscription</string>
+    <string name="profile_title">Mon profil</string>
+    <string name="profile_guest_title">Compte</string>
+    <string name="profile_guest_desc">Connectez-vous ou créez un compte pour accéder à toutes les fonctionnalités.</string>
+    <string name="profile_info_section">Informations personnelles</string>
+    <string name="change_password_section">Changer le mot de passe</string>
+    <string name="email_label">Adresse email</string>
+    <string name="password_label">Mot de passe</string>
+    <string name="password_confirm_label">Confirmer le mot de passe</string>
+    <string name="name_label">Nom</string>
+    <string name="current_password_label">Mot de passe actuel</string>
+    <string name="new_password_label">Nouveau mot de passe</string>
+    <string name="confirm_new_password_label">Confirmer le nouveau mot de passe</string>
+    <string name="btn_login">Se connecter</string>
+    <string name="btn_logout">Se déconnecter</string>
+    <string name="btn_edit_profile">Modifier le profil</string>
+    <string name="btn_update_profile">Mettre à jour</string>
+    <string name="btn_change_password">Changer le mot de passe</string>
+    <string name="no_account_link">Pas encore de compte ? S\'inscrire</string>
+    <string name="has_account_link">Déjà un compte ? Se connecter</string>
+    <string name="logout_confirm">Déconnexion réussie.</string>
+    <string name="session_saved">Session enregistrée.</string>
+
+    <!-- Admin général -->
+    <string name="admin_title">Administration</string>
+    <string name="admin_dashboard">Tableau de bord</string>
+    <string name="admin_manage">Gestion</string>
+    <string name="admin_manage_users">Gérer les utilisateurs</string>
+    <string name="admin_manage_exercises">Gérer les exercices</string>
+    <string name="admin_manage_pages">Gérer les pages d\'information</string>
+    <string name="admin_panel_btn">Panneau d\'administration</string>
+
+    <!-- Stats -->
+    <string name="stat_users">Utilisateurs</string>
+    <string name="stat_exercises">Exercices</string>
+    <string name="stat_pages">Pages</string>
+    <string name="stat_sessions">Sessions</string>
+
+    <!-- Boutons admin -->
+    <string name="btn_add">+ Ajouter</string>
+    <string name="btn_edit">Modifier</string>
+    <string name="btn_toggle">Activer/Désactiver</string>
+    <string name="btn_delete">Supprimer</string>
+    <string name="btn_save">Enregistrer</string>
+
+    <!-- Utilisateurs -->
+    <string name="admin_users_title">Utilisateurs</string>
+    <string name="role_label">Rôle</string>
+    <string name="role_user">Utilisateur</string>
+    <string name="role_admin_label">Administrateur</string>
+    <string name="user_active">Actif</string>
+    <string name="user_inactive">Désactivé</string>
+    <string name="confirm_delete_user">Supprimer cet utilisateur ?</string>
+
+    <!-- Exercices admin -->
+    <string name="admin_exercises_title">Exercices de respiration</string>
+    <string name="ex_name_label">Nom de l\'exercice</string>
+    <string name="ex_description_label">Description</string>
+    <string name="ex_active_label">Exercice actif</string>
+    <string name="ex_active">Actif</string>
+    <string name="ex_inactive">Inactif</string>
+    <string name="confirm_delete_exercise">Supprimer cet exercice ?</string>
+
+    <!-- Pages admin -->
+    <string name="admin_pages_title">Pages d\'information</string>
+    <string name="page_title_label">Titre</string>
+    <string name="page_content_label">Contenu</string>
+    <string name="page_order_label">Ordre d\'affichage</string>
+    <string name="page_published_label">Page publiée</string>
+    <string name="page_published">Publié</string>
+    <string name="page_draft">Brouillon</string>
+    <string name="confirm_delete_page">Supprimer cette page ?</string>
+</resources>

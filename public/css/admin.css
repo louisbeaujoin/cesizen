@@ -1,0 +1,4 @@
+/* === En-tête admin (couleur distincte de l'en-tête public) === */
+.admin-header {
+    background: #1e293b;
+}

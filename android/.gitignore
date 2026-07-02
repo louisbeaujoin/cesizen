@@ -1,0 +1,15 @@
+# Build Android
+/app/build/
+/build/
+/.gradle/
+/captures/
+*.iml
+
+# Fichiers locaux
+local.properties
+local.defaults.properties
+
+# IDE
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
