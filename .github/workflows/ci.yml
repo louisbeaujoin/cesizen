@@ -17,7 +17,7 @@ jobs:
     steps:
       # Récupère le code source depuis GitHub
       - name: Checkout du code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # Configure PHP 8.3 avec les extensions requises par Laravel
       - name: Installer PHP 8.3
@@ -54,7 +54,7 @@ jobs:
     steps:
       # Récupère le code source
       - name: Checkout du code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # Construit l'image Docker (PHP + assets Vite + Composer prod)
       - name: Build Docker image
