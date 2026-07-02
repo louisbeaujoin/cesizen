@@ -13,6 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // En-têtes de sécurité HTTP sur toutes les réponses web
+        $middleware->web(\App\Http\Middleware\SecurityHeadersMiddleware::class);
+
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'api.token' => \App\Http\Middleware\ApiTokenMiddleware::class,

@@ -24,11 +24,11 @@ class BreathingController extends Controller
             abort(404);
         }
 
-        // Utilise les durées de l'exercice ou les paramètres de l'URL
-        $inspiration = $request->input('inspiration', $exercise?->inspiration_duration ?? 5);
-        $apnea = $request->input('apnea', $exercise?->apnea_duration ?? 0);
-        $expiration = $request->input('expiration', $exercise?->expiration_duration ?? 5);
-        $cycles = $request->input('cycles', 6);
+        // Cast en entier pour éviter toute injection via les paramètres URL dans le JS
+        $inspiration = (int) $request->input('inspiration', $exercise?->inspiration_duration ?? 5);
+        $apnea       = (int) $request->input('apnea', $exercise?->apnea_duration ?? 0);
+        $expiration  = (int) $request->input('expiration', $exercise?->expiration_duration ?? 5);
+        $cycles      = (int) $request->input('cycles', 6);
 
         return view('breathing.exercise', compact('exercise', 'inspiration', 'apnea', 'expiration', 'cycles'));
     }
