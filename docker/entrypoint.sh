@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Crée .env depuis .env.example si absent (le vrai .env n'est jamais dans l'image)
+[ ! -f .env ] && cp .env.example .env
+
 # Génère une clé applicative si elle n'est pas fournie en variable d'environnement
 [ -z "$APP_KEY" ] && php artisan key:generate --force
 
