@@ -65,10 +65,10 @@ make reset   # Supprime les données et repart de zéro
 
 ```bash
 composer test
-# → 44 tests Pest, SQLite en mémoire, ~2 secondes
+# → 47 tests Pest, SQLite en mémoire, ~2 secondes
 ```
 
-Le pipeline CI GitHub Actions exécute ces tests à chaque push sur `main` ou `develop`. Le build Docker ne démarre que si les 44 tests passent.
+Le pipeline CI GitHub Actions exécute ces tests à chaque push sur `main` ou `develop`. Le build Docker ne démarre que si les 47 tests passent.
 
 ## Architecture des branches
 
