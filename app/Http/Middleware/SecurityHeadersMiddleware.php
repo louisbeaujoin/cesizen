@@ -25,6 +25,12 @@ class SecurityHeadersMiddleware
         // Désactive les fonctionnalités sensibles non utilisées
         $response->headers->set('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
 
+        // Restreint les sources de contenu chargées par le navigateur (XSS, injection)
+        $response->headers->set(
+            'Content-Security-Policy',
+            "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'none';"
+        );
+
         return $response;
     }
 }

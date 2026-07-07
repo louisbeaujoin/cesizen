@@ -9,6 +9,15 @@ test('security headers are present on home page', function () {
     $response->assertHeader('X-Frame-Options', 'SAMEORIGIN');
     $response->assertHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
     $response->assertHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+    $response->assertHeader('Content-Security-Policy');
+});
+
+test('content security policy blocks external sources', function () {
+    $response = $this->get('/');
+    $csp = $response->headers->get('Content-Security-Policy');
+    expect($csp)->toContain("default-src 'self'");
+    expect($csp)->toContain("object-src 'none'");
+    expect($csp)->toContain("frame-ancestors 'none'");
 });
 
 test('throttle middleware blocks after 5 login attempts', function () {
