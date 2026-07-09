@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>CESIZen — Guide de démo soutenance</title>
+<style>
+:root {
+  --dark:   #1D1D1B;
+  --yellow: #FAE510;
+  --gray:   #6E6E78;
+  --light:  #F8F8F5;
+  --light2: #EEEEE8;
+  --white:  #FFFFFF;
+  --green:  #1A6B2E;
+  --green-bg: #D4EDDA;
+  --red:    #8B1A1A;
+  --text:   #232328;
+  --border: #DDDDD6;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --dark:#0E0E0C;--yellow:#FAE510;--gray:#9898A4;--light:#1C1C1A;--light2:#252523;--white:#1A1A18;--green:#2ECC5F;--green-bg:#0D2E17;--red:#FF6B6B;--text:#E8E8E0;--border:#333330; }
+}
+:root[data-theme="dark"]  { --dark:#0E0E0C;--yellow:#FAE510;--gray:#9898A4;--light:#1C1C1A;--light2:#252523;--white:#1A1A18;--green:#2ECC5F;--green-bg:#0D2E17;--red:#FF6B6B;--text:#E8E8E0;--border:#333330; }
+:root[data-theme="light"] { --dark:#1D1D1B;--yellow:#FAE510;--gray:#6E6E78;--light:#F8F8F5;--light2:#EEEEE8;--white:#FFFFFF;--green:#1A6B2E;--green-bg:#D4EDDA;--red:#8B1A1A;--text:#232328;--border:#DDDDD6; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--white); color: var(--text); font-size: 14px; line-height: 1.5; max-width: 800px; margin: 0 auto; padding: 32px 28px 56px; }
+
+/* HEADER */
+.doc-header { display:flex; align-items:flex-end; justify-content:space-between; border-bottom:3px solid var(--dark); padding-bottom:16px; margin-bottom:24px; gap:16px; }
+.doc-header .logo { font-size:26px; font-weight:900; color:var(--dark); letter-spacing:-1px; line-height:1; }
+.doc-header .logo em { color:var(--yellow); font-style:normal; background:var(--dark); padding:1px 4px; }
+.doc-header .meta { text-align:right; font-size:11px; color:var(--gray); line-height:1.6; }
+.doc-header .meta strong { color:var(--text); font-size:13px; display:block; }
+
+/* TIP */
+.tip { background:var(--light); border-left:4px solid var(--yellow); padding:11px 16px; margin-bottom:24px; font-size:13px; }
+.tip strong { color:var(--dark); }
+
+/* PHASE */
+.phase { margin-bottom:24px; }
+.phase-header { display:flex; align-items:center; gap:10px; background:var(--dark); color:var(--white); padding:10px 16px; }
+.phase-label { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); }
+.phase-title { font-size:15px; font-weight:700; flex:1; color:#fff; }
+.phase-time { font-size:12px; color:var(--gray); white-space:nowrap; font-variant-numeric:tabular-nums; }
+.phase-body { border:1px solid var(--border); border-top:none; }
+
+/* STEP */
+.step { display:grid; grid-template-columns:36px 1fr; border-bottom:1px solid var(--border); }
+.step:last-child { border-bottom:none; }
+.step-num { background:var(--light2); display:flex; align-items:flex-start; justify-content:center; padding:14px 0; font-size:12px; font-weight:800; color:var(--gray); border-right:1px solid var(--border); }
+.step-content { padding:13px 16px; }
+.step-action { font-size:14px; font-weight:600; color:var(--text); margin-bottom:6px; }
+.step-note { font-size:12px; color:var(--gray); margin-bottom:6px; line-height:1.45; }
+.step-note em { font-style:normal; color:var(--text); font-weight:500; }
+
+/* GITHUB LINK — lien cliquable noir/jaune */
+.gh-link {
+  display:flex; align-items:center; gap:10px;
+  background:var(--dark); color:#D8D8C8;
+  font-family:'Consolas','Cascadia Code',monospace; font-size:12.5px;
+  padding:9px 14px; margin:5px 0; text-decoration:none;
+  border-left:4px solid var(--yellow);
+}
+.gh-link:hover { opacity:.85; }
+.gh-link strong { color:var(--yellow); }
+.gh-link-sm { font-size:11px; padding:6px 14px; }
+.gh-icon { display:inline-flex; align-items:center; justify-content:center; background:var(--yellow); color:var(--dark); font-size:10px; font-weight:900; width:20px; height:20px; flex-shrink:0; font-family:'Segoe UI',sans-serif; }
+
+/* URL (app locale) */
+.url-link { display:flex; align-items:center; gap:8px; background:var(--light); border:1px solid var(--border); border-left:3px solid var(--yellow); padding:7px 12px; font-family:'Consolas',monospace; font-size:12.5px; color:var(--text); margin:5px 0; text-decoration:none; }
+.url-icon { font-size:9px; font-weight:700; color:var(--gray); text-transform:uppercase; letter-spacing:.5px; white-space:nowrap; }
+
+/* COMMAND */
+.cmd { display:flex; align-items:stretch; margin:5px 0; }
+.cmd-where { background:var(--yellow); color:var(--dark); font-size:9px; font-weight:800; padding:0 8px; display:flex; align-items:center; white-space:nowrap; letter-spacing:.5px; text-transform:uppercase; flex-shrink:0; }
+.cmd-text { background:var(--dark); color:#D8D8C8; font-family:'Consolas',monospace; font-size:12.5px; padding:8px 14px; flex:1; word-break:break-all; line-height:1.4; }
+.cmd-text .kw { color:var(--yellow); }
+
+/* CREDS */
+.creds { display:flex; gap:8px; flex-wrap:wrap; margin:5px 0; }
+.cred-pill { background:var(--light2); border:1px solid var(--border); padding:4px 10px; font-family:'Consolas',monospace; font-size:12px; }
+.cred-pill .label { font-size:9px; text-transform:uppercase; letter-spacing:1px; color:var(--gray); font-family:'Segoe UI',sans-serif; display:block; font-weight:700; }
+
+/* BADGE */
+.badge { display:inline-block; padding:2px 7px; font-size:10px; font-weight:700; }
+.badge.ok { background:var(--green-bg); color:var(--green); }
+
+/* CHECKLIST */
+.checklist { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.checklist li { display:flex; align-items:center; gap:8px; font-size:12.5px; }
+.check-box { width:16px; height:16px; border:2px solid var(--border); flex-shrink:0; }
+
+/* BRANCHES VISUAL */
+.branch-visual { background:var(--dark); padding:10px 14px; margin:6px 0; font-family:'Consolas',monospace; font-size:11.5px; color:#D8D8C8; line-height:1.8; }
+.branch-visual .b-main    { color:#FAE510; font-weight:700; }
+.branch-visual .b-develop { color:#7DD3FC; font-weight:700; }
+.branch-visual .b-feature { color:#86EFAC; font-weight:700; }
+.branch-visual .b-dep     { color:#9898A4; }
+
+/* FALLBACK */
+.fallback { margin-top:24px; border:2px solid var(--red); }
+.fallback-header { background:var(--red); color:#fff; padding:8px 14px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+.fallback-body { padding:14px 16px; }
+
+/* VS CODE UI */
+.vsc-ui { margin: 6px 0; }
+.vsc-bar { background:#1e1e1e; color:#d4d4d4; font-family:'Consolas',monospace; font-size:11px; padding:5px 12px; display:flex; justify-content:space-between; border-top:2px solid #FAE510; }
+.vsc-branch { color:#FAE510; font-weight:700; }
+.vsc-info { color:#6e6e78; }
+.vsc-panel { background:#252526; border:1px solid #3c3c3c; padding:0; font-family:'Segoe UI',sans-serif; font-size:11.5px; }
+.vsc-panel-title { background:#2d2d2d; color:#cccccc; padding:5px 10px; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; border-bottom:1px solid #3c3c3c; }
+.vsc-section { color:#9898a4; font-size:10px; font-weight:700; letter-spacing:1px; padding:4px 10px; text-transform:uppercase; }
+.vsc-file { display:flex; align-items:center; justify-content:space-between; padding:4px 10px 4px 20px; color:#cccccc; border-bottom:1px solid #3c3c3c; }
+.vsc-filename { font-family:'Consolas',monospace; font-size:11px; }
+.vsc-status { color:#FAE510; font-weight:700; font-size:11px; margin-left:8px; }
+.vsc-action-row { padding:5px 10px; display:flex; align-items:center; gap:6px; }
+.vsc-btn { background:#3c3c3c; color:#cccccc; border:1px solid #555; padding:2px 8px; font-size:11px; cursor:pointer; font-weight:700; }
+.vsc-input { background:#3c3c3c; color:#cccccc; border:1px solid #555; margin:6px 10px 4px; padding:6px 8px; font-family:'Consolas',monospace; font-size:11px; }
+.vsc-btn-commit { background:#0e639c; color:#fff; padding:4px 12px; font-size:11px; font-weight:700; cursor:pointer; }
+
+@media print {
+  body { padding:18px 20px; max-width:none; font-size:12px; }
+  .phase { page-break-inside:avoid; }
+  .cmd-text { font-size:11px; }
+  :root { --dark:#1D1D1B;--yellow:#FAE510;--gray:#6E6E78;--light:#F8F8F5;--light2:#EEEEE8;--white:#FFFFFF;--text:#232328;--border:#DDDDD6;--green:#1A6B2E;--green-bg:#D4EDDA; }
+}
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div class="logo">CESI<em>Zen</em></div>
+  <div class="meta">
+    <strong>Guide de démonstration — Soutenance Bloc 3</strong>
+    INFCDAAL3 · Louis Beaujoin · Juillet 2026
+  </div>
+</div>
+
+<div class="tip">
+  <strong>Durée totale démo : 6 minutes.</strong>
+  Ouvrir ce guide + tous les onglets <em>avant</em> d'entrer en salle. Ne pas fermer le terminal Docker.
+</div>
+
+<!-- ══ PRÉ-DÉMO ══ -->
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-label">Avant d'entrer</span>
+    <span class="phase-title">Préparation</span>
+    <span class="phase-time">— hors chrono</span>
+  </div>
+  <div class="phase-body">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-action">Démarrer Docker Desktop, puis lancer les containers</div>
+        <div class="step-note">D'abord : ouvrir <em>Docker Desktop</em> depuis le Bureau ou la barre des tâches et attendre l'icône verte "Engine running".</div>
+        <div class="cmd"><div class="cmd-where">Terminal</div><div class="cmd-text"><span class="kw">docker compose</span> up -d --build</div></div>
+        <div class="step-note">Attendre ~30 sec que les 2 containers soient <em>healthy</em>, puis vérifier :</div>
+        <div class="cmd"><div class="cmd-where">Vérifier</div><div class="cmd-text"><span class="kw">docker compose</span> ps</div></div>
+        <div class="step-note">Résultat attendu : <em>cesizen-app-1 Up · cesizen-db-1 Up (healthy)</em></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-action">Ouvrir ces 6 onglets maintenant (cliquer sur chacun)</div>
+        <a href="http://localhost:8080" class="url-link"><span class="url-icon">① APP</span>&nbsp; http://localhost:8080</a>
+        <a href="https://github.com/louisbeaujoin/cesizen/actions" class="url-link"><span class="url-icon">② CI/CD</span>&nbsp; github.com/louisbeaujoin/cesizen/actions</a>
+        <a href="https://github.com/louisbeaujoin/cesizen/branches" class="url-link"><span class="url-icon">③ BRANCHES</span>&nbsp; github.com/louisbeaujoin/cesizen/branches</a>
+        <a href="https://github.com/louisbeaujoin/cesizen/network" class="url-link"><span class="url-icon">④ GIT FLOW</span>&nbsp; github.com/louisbeaujoin/cesizen/network</a>
+        <a href="https://github.com/louisbeaujoin/cesizen/issues" class="url-link"><span class="url-icon">⑤ ISSUES</span>&nbsp; github.com/louisbeaujoin/cesizen/issues</a>
+        <a href="https://github.com/users/louisbeaujoin/projects/1" class="url-link"><span class="url-icon">⑥ KANBAN</span>&nbsp; github.com/users/louisbeaujoin/projects/1</a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-action">Checklist pré-démo</div>
+        <ul class="checklist">
+          <li><div class="check-box"></div> Docker Compose en marche</li>
+          <li><div class="check-box"></div> http://localhost:8080 répond</li>
+          <li><div class="check-box"></div> Onglet GitHub Actions ouvert</li>
+          <li><div class="check-box"></div> Onglet Branches ouvert</li>
+          <li><div class="check-box"></div> Onglet Issues ouvert</li>
+          <li><div class="check-box"></div> Terminal visible en arrière-plan</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ PARTIE A ══ -->
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-label">Partie A</span>
+    <span class="phase-title">Versioning + CI/CD</span>
+    <span class="phase-time">3 min</span>
+  </div>
+  <div class="phase-body">
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-action">Montrer les 3 branches</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/branches" class="gh-link">
+          <span class="gh-icon">⎇</span> github.com/louisbeaujoin/cesizen<strong>/branches</strong>
+        </a>
+        <div class="step-note" style="margin-top:6px;">Les 3 branches à montrer au jury :</div>
+        <div class="branch-visual">
+          <span class="b-main">main</span>            ← branche stable — tag v1.0.0 — PR uniquement<br>
+          &nbsp;└── <span class="b-develop">develop</span>       ← intégration continue — tous les commits<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="b-feature">feature/historique-sessions</span>  ← fonctionnalité isolée (issue #15)<br>
+          <span class="b-dep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── dependabot/*</span>  ← veille automatique des dépendances
+        </div>
+        <div class="step-note">Puis montrer le graphe Git Flow visuel :</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/network" class="gh-link gh-link-sm">
+          <span class="gh-icon">◎</span> github.com/louisbeaujoin/cesizen<strong>/network</strong> — graphe complet
+        </a>
+        <div class="step-note" style="margin-top:4px;">Dire : <em>« main (stable, v1.0.0) · develop (intégration) · feature/* (fonctionnalité isolée liée à un issue). »</em></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-action">Montrer le dernier run CI/CD</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/actions" class="gh-link">
+          <span class="gh-icon">✓</span> github.com/louisbeaujoin/cesizen<strong>/actions</strong>
+        </a>
+        <div class="step-note" style="margin-top:6px;">Cliquer sur le dernier run vert → montrer les <em>2 jobs séquentiels</em> :</div>
+        <div class="step-note"><em>« Job "tests" → 48/48 ✅ — Job "docker" déclenché uniquement si tests passent (needs: tests). »</em></div>
+        <div class="step-note">Si le jury demande le fichier de workflow :</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/blob/develop/.github/workflows/ci.yml" class="gh-link gh-link-sm">
+          <span class="gh-icon">⚙</span> .github/workflows/<strong>ci.yml</strong> — les 2 jobs séquentiels
+        </a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <div class="step-action">Lancer les tests en direct</div>
+        <div class="cmd"><div class="cmd-where">Terminal</div><div class="cmd-text"><span class="kw">php artisan</span> test</div></div>
+        <div class="step-note">— ou via Docker si WAMP n'est pas lancé :</div>
+        <div class="cmd"><div class="cmd-where">Docker</div><div class="cmd-text"><span class="kw">docker compose exec</span> app <span class="kw">php artisan</span> test</div></div>
+        <div class="step-note">Résultat attendu : <span class="badge ok">48 passed · 122 assertions · 0 failed</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ PARTIE B ══ -->
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-label">Partie B</span>
+    <span class="phase-title">Ticketing GitHub</span>
+    <span class="phase-time">2 min</span>
+  </div>
+  <div class="phase-body">
+
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-content">
+        <div class="step-action">Montrer le board Kanban</div>
+        <a href="https://github.com/users/louisbeaujoin/projects/1" class="gh-link">
+          <span class="gh-icon">☰</span> github.com/users/louisbeaujoin/<strong>projects/1</strong> — CESIZen Suivi
+        </a>
+        <div class="step-note" style="margin-top:6px;">Dire : <em>« 4 colonnes : A traiter · En cours · En test · Terminé. »</em></div>
+        <div class="step-note">État actuel du board : #13 En cours · #14 A traiter · #15 <strong>En cours</strong> (feature branch) · #16 Terminé</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">8</div>
+      <div class="step-content">
+        <div class="step-action">Montrer les issues avec labels SLA</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/issues" class="gh-link">
+          <span class="gh-icon">!</span> github.com/louisbeaujoin/cesizen<strong>/issues</strong>
+        </a>
+        <div class="step-note" style="margin-top:6px;">Ouvrir issue <em>#13 [BUG] bloquant-critique</em> → montrer les labels SLA (HTTP 429 après 5 tentatives, throttle:5,1). Montrer la liste complète des labels :</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/labels" class="gh-link gh-link-sm">
+          <span class="gh-icon">🏷</span> github.com/louisbeaujoin/cesizen<strong>/labels</strong> — bloquant-critique · majeur · mineur · en-cours · en-test
+        </a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">9</div>
+      <div class="step-content">
+        <div class="step-action">Montrer Dependabot (PRs automatiques)</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/pulls?q=is%3Apr+author%3Aapp%2Fdependabot" class="gh-link">
+          <span class="gh-icon">↑</span> github.com/louisbeaujoin/cesizen<strong>/pulls</strong> — filtre Dependabot (12 PRs)
+        </a>
+        <div class="step-note" style="margin-top:6px;">Dire : <em>« Veille hebdomadaire Composer + npm (lundi 08h00), mensuelle GitHub Actions. Labels auto : dependabot + maintenance. »</em></div>
+        <a href="https://github.com/louisbeaujoin/cesizen/blob/develop/.github/dependabot.yml" class="gh-link gh-link-sm">
+          <span class="gh-icon">⚙</span> .github/<strong>dependabot.yml</strong> — configuration de la veille
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ PARTIE C ══ -->
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-label">Partie C</span>
+    <span class="phase-title">Application Docker live</span>
+    <span class="phase-time">1 min</span>
+  </div>
+  <div class="phase-body">
+
+    <div class="step">
+      <div class="step-num">10</div>
+      <div class="step-content">
+        <div class="step-action">Ouvrir l'application</div>
+        <a href="http://localhost:8080" class="url-link"><span class="url-icon">APP</span>&nbsp; http://localhost:8080</a>
+        <div class="step-note" style="margin-top:6px;">Se connecter avec :</div>
+        <div class="creds">
+          <div class="cred-pill"><span class="label">Login</span>admin@cesizen.fr</div>
+          <div class="cred-pill"><span class="label">Mot de passe</span>password</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">11</div>
+      <div class="step-content">
+        <div class="step-action">Montrer les en-têtes de sécurité — F12 → Network → Headers</div>
+        <div class="step-note">Appuyer sur <em>F12</em> → onglet <em>Network</em> → recharger → 1ʳᵉ requête → <em>Response Headers</em>.</div>
+        <div class="step-note">Pointer : <em>X-Content-Type-Options · X-Frame-Options · Content-Security-Policy · Referrer-Policy · Permissions-Policy</em></div>
+        <div class="step-note">— ou PowerShell :</div>
+        <div class="cmd"><div class="cmd-where">PowerShell</div><div class="cmd-text"><span class="kw">Invoke-WebRequest</span> http://localhost:8080 <span class="kw">-UseBasicParsing</span> | <span class="kw">Select-Object</span> -ExpandProperty Headers</div></div>
+        <div class="step-note">Code source du middleware :</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/blob/develop/app/Http/Middleware/SecurityHeadersMiddleware.php" class="gh-link gh-link-sm">
+          <span class="gh-icon">🔒</span> app/Http/Middleware/<strong>SecurityHeadersMiddleware.php</strong>
+        </a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">12</div>
+      <div class="step-content">
+        <div class="step-action">Exercice de respiration + back-office</div>
+        <div class="step-note">1. <em>Exercices de respiration</em> → lancer → montrer l'historique personnel.</div>
+        <div class="step-note">2. <em>Administration</em> → gestion des utilisateurs et contenus.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ LIENS BONUS ══ -->
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-label">Si le jury demande</span>
+    <span class="phase-title">Liens supplémentaires</span>
+    <span class="phase-time">— sur demande</span>
+  </div>
+  <div class="phase-body">
+
+    <div class="step">
+      <div class="step-num">★</div>
+      <div class="step-content">
+        <div class="step-action">Release v1.0.0 + Tags SemVer</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/releases/tag/v1.0.0" class="gh-link">
+          <span class="gh-icon">◈</span> github.com/louisbeaujoin/cesizen/releases/tag/<strong>v1.0.0</strong>
+        </a>
+        <a href="https://github.com/louisbeaujoin/cesizen/tags" class="gh-link gh-link-sm">
+          <span class="gh-icon">◈</span> github.com/louisbeaujoin/cesizen<strong>/tags</strong>
+        </a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">★</div>
+      <div class="step-content">
+        <div class="step-action">PR develop → main (flux de livraison)</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/pull/17" class="gh-link">
+          <span class="gh-icon">⤴</span> github.com/louisbeaujoin/cesizen<strong>/pull/17</strong> — PR v1.0.0 (mergée)
+        </a>
+        <a href="https://github.com/louisbeaujoin/cesizen/pulls" class="gh-link gh-link-sm">
+          <span class="gh-icon">⤴</span> github.com/louisbeaujoin/cesizen<strong>/pulls</strong> — toutes les PRs
+        </a>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">★</div>
+      <div class="step-content">
+        <div class="step-action">Fichiers sources clés</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/blob/develop/tests/Feature/SecurityTest.php" class="gh-link gh-link-sm">
+          <span class="gh-icon">✓</span> tests/Feature/<strong>SecurityTest.php</strong> — 4 tests sécurité automatisés
+        </a>
+        <a href="https://github.com/louisbeaujoin/cesizen/blob/develop/docker-compose.yml" class="gh-link gh-link-sm">
+          <span class="gh-icon">🐳</span> <strong>docker-compose.yml</strong> — 2 services (app PHP 8.3 + MySQL 8)
+        </a>
+        <a href="https://github.com/louisbeaujoin/cesizen" class="gh-link gh-link-sm">
+          <span class="gh-icon">⌂</span> github.com/louisbeaujoin/<strong>cesizen</strong> — page principale
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ VS CODE PUSH ══ -->
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-label">Bonus jury</span>
+    <span class="phase-title">Push en direct depuis VS Code → CI se déclenche</span>
+    <span class="phase-time">2 min</span>
+  </div>
+  <div class="phase-body">
+
+    <div class="step">
+      <div class="step-num">A</div>
+      <div class="step-content">
+        <div class="step-action">Ouvrir le projet dans VS Code</div>
+        <div class="cmd"><div class="cmd-where">Terminal</div><div class="cmd-text"><span class="kw">code</span> C:\wamp64\www\cesizen</div></div>
+        <div class="step-note">VS Code s'ouvre sur le projet. Vérifier en bas à gauche que la branche active est <em>develop</em>.</div>
+        <div class="vsc-ui">
+          <div class="vsc-bar">
+            <span class="vsc-branch">⎇ develop</span>
+            <span class="vsc-info">PHP · Laravel · UTF-8</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">B</div>
+      <div class="step-content">
+        <div class="step-action">Faire une modification visible (ex : fichier README ou commentaire)</div>
+        <div class="step-note">Ouvrir par exemple <em>README.md</em> et ajouter une ligne :</div>
+        <div class="cmd"><div class="cmd-where">Fichier</div><div class="cmd-text">README.md  →  ajouter : <span class="kw">&gt; Démonstration soutenance Bloc 3 — Juillet 2026</span></div></div>
+        <div class="step-note">Sauvegarder avec <em>Ctrl+S</em>. Le point orange apparaît sur l'onglet Source Control.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">C</div>
+      <div class="step-content">
+        <div class="step-action">Ouvrir Source Control — Ctrl+Shift+G</div>
+        <div class="vsc-ui">
+          <div class="vsc-panel">
+            <div class="vsc-panel-title">SOURCE CONTROL <span style="float:right;background:var(--yellow);color:var(--dark);font-size:9px;padding:1px 5px;font-weight:800;">1</span></div>
+            <div class="vsc-section">CHANGES</div>
+            <div class="vsc-file">
+              <span class="vsc-filename">README.md</span>
+              <span class="vsc-status">M</span>
+            </div>
+            <div class="vsc-action-row">
+              <span class="vsc-btn">+</span><span style="font-size:11px;color:var(--gray);"> ← cliquer pour stager</span>
+            </div>
+          </div>
+        </div>
+        <div class="step-note">Cliquer <em>+</em> à droite du fichier pour le stager (ou <em>Ctrl+Shift+P → Git: Stage All Changes</em>).</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">D</div>
+      <div class="step-content">
+        <div class="step-action">Écrire le message de commit et committer</div>
+        <div class="vsc-ui">
+          <div class="vsc-panel">
+            <div class="vsc-panel-title">SOURCE CONTROL</div>
+            <div class="vsc-input">docs: demonstration live soutenance Bloc 3</div>
+            <div class="vsc-action-row">
+              <span class="vsc-btn-commit">✓ Commit</span><span style="font-size:11px;color:var(--gray);"> ← Ctrl+Enter</span>
+            </div>
+          </div>
+        </div>
+        <div class="step-note">Taper le message dans la zone en haut, puis <em>Ctrl+Enter</em> (ou cliquer le bouton <strong>Commit</strong>).</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">E</div>
+      <div class="step-content">
+        <div class="step-action">Pusher vers GitHub</div>
+        <div class="vsc-ui">
+          <div class="vsc-panel">
+            <div class="vsc-panel-title">SOURCE CONTROL</div>
+            <div class="vsc-action-row" style="margin-top:4px;">
+              <span class="vsc-btn-commit" style="background:var(--yellow);color:var(--dark);">↑ Sync Changes (1↑)</span>
+              <span style="font-size:11px;color:var(--gray);"> ← cliquer pour push</span>
+            </div>
+          </div>
+        </div>
+        <div class="step-note">Le bouton <em>Sync Changes</em> apparaît en bas de la barre ou dans le panneau Source Control. Cliquer dessus = push vers <em>origin/develop</em>.</div>
+        <div class="step-note">— ou depuis le terminal :</div>
+        <div class="cmd"><div class="cmd-where">Terminal</div><div class="cmd-text"><span class="kw">git push</span> origin develop</div></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">F</div>
+      <div class="step-content">
+        <div class="step-action">Aller sur GitHub Actions — voir la CI se déclencher automatiquement</div>
+        <a href="https://github.com/louisbeaujoin/cesizen/actions" class="gh-link">
+          <span class="gh-icon">✓</span> github.com/louisbeaujoin/cesizen<strong>/actions</strong> — le run apparaît en quelques secondes
+        </a>
+        <div class="step-note" style="margin-top:6px;">Dire : <em>« Chaque push sur develop déclenche automatiquement la CI : job "tests" → 48/48 ✅ → job "docker". Si un test échoue, le docker build n'a jamais lieu. »</em></div>
+        <div class="step-note">Durée attendue du run : <strong>~2 min</strong>. Le résultat apparaît en temps réel.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ FALLBACK ══ -->
+<div class="fallback">
+  <div class="fallback-header">⚠ Problème technique — commandes de secours</div>
+  <div class="fallback-body">
+    <div class="cmd" style="margin-bottom:6px;"><div class="cmd-where">Restart</div><div class="cmd-text"><span class="kw">docker compose</span> restart app</div></div>
+    <div class="cmd" style="margin-bottom:6px;"><div class="cmd-where">Rebuild</div><div class="cmd-text"><span class="kw">docker compose</span> down -v &amp;&amp; <span class="kw">docker compose</span> up -d --build</div></div>
+    <div class="cmd" style="margin-bottom:6px;"><div class="cmd-where">Logs</div><div class="cmd-text"><span class="kw">docker compose</span> logs -f app</div></div>
+    <div class="cmd"><div class="cmd-where">Port</div><div class="cmd-text"><span class="kw">netstat</span> -ano | <span class="kw">findstr</span> :8080</div></div>
+    <p style="font-size:12px;color:var(--gray);margin-top:10px;">En dernier recours : montrer le run CI GitHub Actions ✅ — la preuve est dans le run vert.</p>
+  </div>
+</div>
+
+</body>
+</html>
