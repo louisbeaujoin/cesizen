@@ -1,58 +1,104 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CESIZen
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Plateforme web de bien-être mental développée pour un Ministère fictif dans le cadre d'un projet de formation CDA CESI.
 
-## About Laravel
+## Présentation
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+CESIZen propose des exercices de respiration guidés et des pages d'information sur la santé mentale, accessibles sans inscription. Les utilisateurs connectés disposent d'un espace personnel pour suivre leur historique de sessions. Un back-office permet aux administrateurs de gérer les contenus et les utilisateurs.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Stack technique
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Composant | Technologie | Version |
+|-----------|-------------|---------|
+| Framework | Laravel | 13 |
+| Langage | PHP | 8.3 |
+| CSS / Build | Tailwind CSS + Vite | 4 / 7 |
+| Base de données | MySQL | 8.0 |
+| Tests | Pest | 4.x |
+| Conteneur | Docker + Apache | PHP 8.3 |
+| CI/CD | GitHub Actions | — |
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Démarrage rapide — Environnement DEV (WAMP)
 
 ```bash
-composer require laravel/boost --dev
+git clone https://github.com/louisbeaujoin/cesizen.git
+cd cesizen
 
-php artisan boost:install
+composer install
+npm install
+
+cp .env.example .env
+php artisan key:generate
+
+# Configurer DB_DATABASE, DB_USERNAME, DB_PASSWORD dans .env
+php artisan migrate --seed
+
+composer dev   # Lance PHP + Vite en parallèle → localhost:8000
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Environnement TEST — Docker Compose
 
-## Contributing
+Prérequis : Docker Desktop (≥ 4 Go RAM alloués, ≥ 3 Go disque disponible).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+make up      # Build de l'image + démarrage app (port 8080) + db (MySQL 8)
+make seed    # Migrations + données de démo
 
-## Code of Conduct
+# Accès : http://localhost:8080
+# Admin : admin@cesizen.fr / password
+# User  : user@cesizen.fr  / password
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+make down    # Arrêt propre
+make reset   # Supprime les données et repart de zéro
+```
 
-## Security Vulnerabilities
+| Commande | Action |
+|----------|--------|
+| `make up` | Build + démarrage |
+| `make seed` | Migrations + seeders |
+| `make logs` | Logs en temps réel |
+| `make shell` | Terminal dans le conteneur |
+| `make down` | Arrêt |
+| `make reset` | Remise à zéro complète |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Tests automatisés
 
-## License
+```bash
+composer test
+# → 47 tests Pest, SQLite en mémoire, ~2 secondes
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Le pipeline CI GitHub Actions exécute ces tests à chaque push sur `main` ou `develop`. Le build Docker ne démarre que si les 47 tests passent.
+
+## Architecture des branches
+
+```
+main        ← code stable, livrable en production (merge via PR uniquement)
+develop     ← intégration continue des développements
+feature/*   ← fonctionnalité isolée, créée depuis develop
+```
+
+Conventions de commit : [Conventional Commits](https://www.conventionalcommits.org/)
+Versioning : [Semantic Versioning](https://semver.org/) — version actuelle `v1.0.0`
+
+## Sécurité
+
+- Protection brute force : `throttle:5,1` sur les routes de connexion
+- En-têtes HTTP de sécurité : `SecurityHeadersMiddleware` (X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy)
+- Protection XSS : cast `(int)` sur les paramètres injectés en JavaScript + Blade `{{ }}` natif
+- Protection CSRF : token `@csrf` sur tous les formulaires
+- Mots de passe : bcrypt 12 rounds via cast `'hashed'` sur le modèle User
+- Secrets : `.env` exclu de git, `APP_DEBUG=false` dans `.env.example`
+
+Pour signaler une vulnérabilité : ouvrir une issue confidentielle sur GitHub.
+
+## Documentation
+
+- [Dossier technique Bloc 3](document/CESIZen_Dossier_Bloc3.pdf) — plan de déploiement, maintenance et sécurisation
+- [Présentation soutenance](document/CESIZen_Presentation_Bloc3.pdf) — 15 slides
+- [Script de démo](document/script_demo.md)
+- [Suivi du projet](https://github.com/louisbeaujoin/cesizen/projects) — board GitHub Projects
+
+## Licence
+
+Projet de formation — usage éducatif uniquement.

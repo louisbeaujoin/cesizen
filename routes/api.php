@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\Api\BreathingApiController;
 use App\Http\Controllers\Api\InformationApiController;
 
-Route::post('/login', [AuthApiController::class, 'login']);
+Route::post('/login', [AuthApiController::class, 'login'])->middleware('throttle:5,1');
 Route::post('/register', [AuthApiController::class, 'register']);
 Route::get('/exercises', [BreathingApiController::class, 'index']);
 Route::get('/information', [InformationApiController::class, 'index']);

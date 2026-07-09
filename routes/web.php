@@ -16,7 +16,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Routes accessibles uniquement aux visiteurs non connectés
 Route::middleware('guest')->group(function () {
     Route::get('/connexion', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/connexion', [AuthController::class, 'login']);
+    Route::post('/connexion', [AuthController::class, 'login'])->middleware('throttle:5,1');
     Route::get('/inscription', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/inscription', [AuthController::class, 'register']);
 });
