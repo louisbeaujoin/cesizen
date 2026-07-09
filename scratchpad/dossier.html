@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>CESIZen — Dossier Technique Bloc 3 INFCDAAL3</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10.5pt; color: #232328; line-height: 1.6; }
+
+/* Palette de référence — Dossier_RESources_Relationnelles_reorganise.pdf */
+:root {
+  --dark:   #1D1D1B;
+  --dark2:  #232328;
+  --yellow: #FAE510;
+  --gray:   #6E6E78;
+  --white:  #FFFFFF;
+  --light:  #F8F8F5;
+  --light2: #EEEEEA;
+  --border: #E0E0D8;
+}
+
+/* ── PAGE DE GARDE ── */
+.cover {
+  page-break-after: always;
+  display: flex;
+  min-height: 100vh;
+}
+.cover-left {
+  background: var(--dark);
+  width: 42%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 60px 48px;
+}
+.cover-left .bloc-tag {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--dark);
+  font-size: 7.5pt;
+  font-weight: 800;
+  padding: 5px 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.cover-left .logo {
+  font-size: 56pt;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-top: 40px;
+}
+.cover-left .logo em { color: var(--yellow); font-style: normal; }
+.cover-left .yellow-bar { width: 64px; height: 4px; background: var(--yellow); margin: 24px 0; }
+.cover-left .app-desc {
+  font-size: 9pt;
+  color: var(--gray);
+  line-height: 1.6;
+}
+.cover-left .stack {
+  margin-top: 40px;
+  font-size: 8pt;
+  color: var(--gray);
+  border-top: 1px solid #444;
+  padding-top: 18px;
+}
+.cover-right {
+  flex: 1;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 70px 56px;
+}
+.cover-right h1 {
+  font-size: 18pt;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.4;
+  border-left: 4px solid var(--yellow);
+  padding-left: 18px;
+  margin-bottom: 36px;
+}
+.cover-right .meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.cover-right .meta-item {
+  background: var(--light);
+  border-left: 3px solid var(--yellow);
+  padding: 12px 16px;
+}
+.cover-right .meta-item .label {
+  font-size: 7.5pt;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+.cover-right .meta-item .value {
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: var(--dark);
+}
+.cover-right .infcdaal-tag {
+  display: inline-block;
+  background: var(--dark);
+  color: var(--yellow);
+  font-size: 8pt;
+  font-weight: 700;
+  padding: 6px 16px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ── TABLE DES MATIÈRES ── */
+.toc-page {
+  page-break-after: always;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.toc-page .toc-header {
+  background: var(--dark);
+  color: var(--white);
+  padding: 30px 60px;
+  flex-shrink: 0;
+}
+.toc-page .toc-header h2 { font-size: 18pt; font-weight: 700; }
+.toc-page .toc-body { padding: 36px 60px; flex: 1; }
+.toc-page nav { display: flex; flex-direction: column; gap: 0; }
+.toc-main {
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--dark);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--light2);
+  font-weight: 600;
+  font-size: 10.5pt;
+}
+.toc-main .toc-num {
+  background: var(--yellow);
+  color: var(--dark);
+  font-weight: 800;
+  font-size: 9pt;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 14px;
+}
+.toc-main .toc-dots { flex: 1; border-bottom: 1px dotted var(--border); margin: 0 10px; position: relative; top: -4px; }
+.toc-sub { padding-left: 42px; }
+.toc-sub a {
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--gray);
+  padding: 5px 0;
+  font-size: 9.5pt;
+}
+.toc-sub a .toc-num-sub {
+  font-weight: 700;
+  color: var(--dark2);
+  min-width: 42px;
+  flex-shrink: 0;
+  font-size: 9pt;
+}
+.toc-sub a .toc-dots { flex: 1; border-bottom: 1px dotted var(--border); margin: 0 10px; position: relative; top: -4px; }
+
+/* ── PAGES DE CONTENU ── */
+.content-page { padding: 50px 60px; }
+.page-break { page-break-before: always; }
+
+/* En-tête de section */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 28px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0;
+}
+.section-num {
+  background: var(--dark);
+  color: var(--yellow);
+  font-size: 14pt;
+  font-weight: 900;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 18px;
+}
+.section-header h2 {
+  font-size: 17pt;
+  color: var(--dark);
+  font-weight: 700;
+  border-bottom: 3px solid var(--yellow);
+  padding-bottom: 18px;
+  flex: 1;
+}
+
+h3 {
+  font-size: 12pt;
+  color: var(--dark);
+  font-weight: 700;
+  margin: 26px 0 13px;
+  padding-left: 14px;
+  border-left: 4px solid var(--yellow);
+}
+h4 {
+  font-size: 10.5pt;
+  color: var(--dark2);
+  font-weight: 700;
+  margin: 18px 0 10px;
+}
+p { margin-bottom: 11px; color: var(--dark2); }
+ul, ol { margin: 10px 0 10px 22px; }
+li { margin-bottom: 6px; color: var(--dark2); }
+
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 9.5pt; }
+th {
+  background: var(--dark);
+  color: var(--white);
+  padding: 9px 11px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 9pt;
+}
+td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:nth-child(even) { background: var(--light); }
+
+pre {
+  background: var(--dark);
+  color: #D8D8D0;
+  padding: 16px 18px;
+  font-size: 8.5pt;
+  margin: 13px 0;
+  line-height: 1.5;
+  border-left: 4px solid var(--yellow);
+}
+code {
+  background: var(--light);
+  color: var(--dark);
+  padding: 2px 6px;
+  font-size: 9pt;
+}
+pre code { background: none; color: inherit; padding: 0; }
+
+.callout {
+  border-left: 4px solid;
+  padding: 12px 16px;
+  margin: 14px 0;
+}
+.callout.info    { border-color: var(--yellow); background: var(--light); }
+.callout.success { border-color: #2D7A2D;       background: #F0F8F0; }
+.callout.warning { border-color: #D4820A;       background: #FFFBF0; }
+.callout.danger  { border-color: #B22222;       background: #FFF5F5; }
+.callout-title { font-weight: 700; font-size: 10pt; margin-bottom: 6px; color: var(--dark); }
+
+.badge { display: inline-block; padding: 2px 9px; font-size: 8pt; font-weight: 700; }
+.badge.green  { background: #D4EDDA; color: #155724; }
+.badge.blue   { background: #D1ECF1; color: #0C5460; }
+.badge.red    { background: #F8D7DA; color: #721C24; }
+.badge.orange { background: #FFE8D0; color: #7A3B00; }
+.badge.yellow { background: #FFF9C4; color: #7A6300; }
+.badge.gray   { background: var(--light2); color: var(--gray); }
+
+.crit-critique { background: #7f1d1d; color: white; font-weight: 700; padding: 3px 8px; }
+.crit-eleve    { background: #F8D7DA; color: #721C24; font-weight: 700; padding: 3px 8px; }
+.crit-moyen    { background: #FFE8D0; color: #7A3B00; padding: 3px 8px; }
+.crit-faible   { background: #D4EDDA; color: #155724; padding: 3px 8px; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
+.card {
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--yellow);
+  border-radius: 0;
+  padding: 16px;
+}
+.card h4 { margin-top: 0; color: var(--dark); }
+
+.escalade-step {
+  display: flex;
+  gap: 18px;
+  padding: 11px 16px;
+  border-left: 4px solid var(--yellow);
+  background: var(--light);
+  margin-bottom: 7px;
+}
+.escalade-step .step-time { font-weight: 800; color: var(--dark); min-width: 72px; flex-shrink: 0; font-size: 9pt; }
+
+/* En-tête de page courant (pied de page) */
+.page-footer {
+  margin-top: 30px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-size: 7.5pt;
+  color: var(--gray);
+}
+.page-footer .pf-right { font-weight: 700; color: var(--dark); }
+
+@page { size: A4; margin: 0; }
+@media print {
+  .cover-left, th, pre, .callout, .badge, .section-num, .toc-page .toc-header {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .crit-critique, .crit-eleve, .crit-moyen, .crit-faible {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .escalade-step, .card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ PAGE DE GARDE ══ -->
+<div class="cover">
+  <div class="cover-left">
+    <div>
+      <div class="bloc-tag">Bloc 3 · CDA CESI · INFCDAAL3</div>
+      <div class="logo">CESI<em>Zen</em></div>
+      <div class="yellow-bar"></div>
+      <div class="app-desc">
+        Plateforme web de bien-être mental<br>
+        Application de santé mentale — Ministère fictif<br><br>
+        Plan de déploiement, maintenance<br>
+        et sécurisation d'une application web<br>
+        en conditions professionnelles
+      </div>
+    </div>
+    <div class="stack">Laravel 13 · PHP 8.3 · MySQL 8 · Docker<br>GitHub Actions · Pest 4 · OWASP Top 10</div>
+  </div>
+  <div class="cover-right">
+    <h1>Dossier Technique<br>Soutenance Bloc 3</h1>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="label">Auteur</div>
+        <div class="value">Louis Beaujoin</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Formation</div>
+        <div class="value">CDA CESI — Bloc 3</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Version</div>
+        <div class="value">v1.0.0 — Juillet 2026</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Tests CI/CD</div>
+        <div class="value">48 tests ✅ GitHub Actions</div>
+      </div>
+    </div>
+    <div class="infcdaal-tag">INFCDAAL3 — Soutenance Bloc 3</div>
+  </div>
+</div>
+
+<!-- ══ TABLE DES MATIÈRES ══ -->
+<div class="toc-page">
+  <div class="toc-header"><h2>Table des matières</h2></div>
+  <div class="toc-body">
+    <nav>
+      <a href="#intro" class="toc-main"><span class="toc-num">1</span><span>Contexte du projet</span><span class="toc-dots"></span></a>
+      <a href="#deploiement" class="toc-main"><span class="toc-num">2</span><span>Plan de déploiement</span><span class="toc-dots"></span></a>
+      <div class="toc-sub">
+        <a href="#environnements"><span class="toc-num-sub">2.1</span><span>Environnements DEV / TEST / PROD</span><span class="toc-dots"></span></a>
+        <a href="#stack"><span class="toc-num-sub">2.2</span><span>Stack technique</span><span class="toc-dots"></span></a>
+        <a href="#docker"><span class="toc-num-sub">2.3</span><span>Infrastructure Docker — environnement TEST configuré</span><span class="toc-dots"></span></a>
+        <a href="#cicd"><span class="toc-num-sub">2.4</span><span>Pipeline CI/CD et pilotage de l'environnement</span><span class="toc-dots"></span></a>
+      </div>
+      <a href="#securisation" class="toc-main"><span class="toc-num">3</span><span>Plan de sécurisation</span><span class="toc-dots"></span></a>
+      <div class="toc-sub">
+        <a href="#criticite"><span class="toc-num-sub">3.1</span><span>Matrice des vulnérabilités et calculs de criticité (P × I)</span><span class="toc-dots"></span></a>
+        <a href="#actions-correctives"><span class="toc-num-sub">3.2</span><span>Actions correctives et préventives</span><span class="toc-dots"></span></a>
+        <a href="#chiffrement"><span class="toc-num-sub">3.3</span><span>Solutions de chiffrement et cryptage</span><span class="toc-dots"></span></a>
+        <a href="#gestion-crise"><span class="toc-num-sub">3.4</span><span>Gestion de crise — escalade, responsabilités et communication</span><span class="toc-dots"></span></a>
+        <a href="#rgpd"><span class="toc-num-sub">3.5</span><span>Données personnelles et conformité RGPD</span><span class="toc-dots"></span></a>
+        <a href="#bonnes-pratiques"><span class="toc-num-sub">3.6</span><span>Bonnes pratiques de développement</span><span class="toc-dots"></span></a>
+      </div>
+      <a href="#maintenance" class="toc-main"><span class="toc-num">4</span><span>Plan de maintenance et pérennité</span><span class="toc-dots"></span></a>
+      <div class="toc-sub">
+        <a href="#ticketing"><span class="toc-num-sub">4.1</span><span>Outil de gestion — GitHub Issues &amp; Projects</span><span class="toc-dots"></span></a>
+        <a href="#sla"><span class="toc-num-sub">4.2</span><span>Méthodologie et SLA par criticité</span><span class="toc-dots"></span></a>
+        <a href="#dependabot"><span class="toc-num-sub">4.3</span><span>Veille technologique — Dependabot</span><span class="toc-dots"></span></a>
+      </div>
+      <a href="#tests" class="toc-main"><span class="toc-num">5</span><span>Tests automatisés — 48 tests · 122 assertions</span><span class="toc-dots"></span></a>
+      <a href="#rollback" class="toc-main"><span class="toc-num">6</span><span>Procédure de rollback</span><span class="toc-dots"></span></a>
+      <a href="#conclusion" class="toc-main"><span class="toc-num">7</span><span>Conclusion</span><span class="toc-dots"></span></a>
+    </nav>
+  </div>
+</div>
+
+<!-- ══ SECTION 1 — CONTEXTE ══ -->
+<div class="content-page" id="intro">
+  <div class="section-header"><div class="section-num">1</div><h2>Contexte du projet</h2></div>
+  <p><strong>CESIZen</strong> est une plateforme web de bien-être mental développée pour un Ministère fictif dans le cadre du Bloc 3 (CDA CESI — INFCDAAL3). Elle propose des exercices de respiration guidés, des pages d'information sur la santé mentale, un espace personnel pour les utilisateurs connectés et un back-office d'administration complet.</p>
+  <div class="callout info">
+    <div class="callout-title">Objectif du Bloc 3 — INFCDAAL3</div>
+    Concevoir un plan de déploiement complet, mettre en place un environnement de déploiement avec automatisations, assurer la maintenance via un outil de ticketing, et sécuriser l'application en identifiant les vulnérabilités avec calculs de criticité.
+  </div>
+  <h3>Modules implémentés</h3>
+  <table>
+    <tr><th>Module</th><th>Statut</th><th>Fonctionnalités principales</th></tr>
+    <tr><td>Comptes utilisateurs</td><td><span class="badge green">✓ Obligatoire</span></td><td>Inscription, connexion, profil, changement MDP, désactivation (admin)</td></tr>
+    <tr><td>Informations santé mentale</td><td><span class="badge green">✓ Obligatoire</span></td><td>Pages santé, CRUD admin, accès public</td></tr>
+    <tr><td>Exercices de respiration</td><td><span class="badge green">✓ Au choix</span></td><td>3 exercices prédéfinis + exercice personnalisable, historique sessions</td></tr>
+    <tr><td>API REST</td><td><span class="badge blue">Bonus</span></td><td>Authentification par token Bearer, accès aux exercices</td></tr>
+  </table>
+  <div class="page-footer">
+    <span>CESIZen — Dossier Technique · Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="pf-right">Louis Beaujoin · CDA CESI · Juillet 2026</span>
+  </div>
+</div>
+
+<!-- ══ SECTION 2 — DÉPLOIEMENT ══ -->
+<div class="content-page page-break" id="deploiement">
+  <div class="section-header"><div class="section-num">2</div><h2>Plan de déploiement</h2></div>
+
+  <h3 id="environnements">2.1 Environnements DEV / TEST / PROD</h3>
+  <table>
+    <tr><th>Critère</th><th>DEV (WAMP local)</th><th>TEST (Docker)</th><th>PROD (théorique)</th></tr>
+    <tr><td>Objectif</td><td>Développement quotidien</td><td>Validation intégration</td><td>Mise en service réelle</td></tr>
+    <tr><td>Démarrage</td><td><code>composer dev</code></td><td><code>docker compose up --build</code></td><td>Pipeline CD automatisé</td></tr>
+    <tr><td>Port</td><td>8000</td><td><strong>8080</strong></td><td>443 (HTTPS — Let's Encrypt)</td></tr>
+    <tr><td>Base de données</td><td>MySQL WAMP local</td><td>MySQL 8 container isolé</td><td>MySQL managé (RDS)</td></tr>
+    <tr><td>Assets Vite</td><td>Hot reload actif</td><td>Compilés dans l'image</td><td>Compilés + CDN</td></tr>
+    <tr><td>APP_DEBUG</td><td>true</td><td><strong>false</strong></td><td>false</td></tr>
+    <tr><td>Ressources min.</td><td>4 Go RAM</td><td>4 Go RAM · 3 Go disque</td><td>2 vCPU · 4 Go · 50 Go SSD</td></tr>
+    <tr><td>Environnement configuré</td><td>—</td><td><span class="badge green">✓ Déployé et opérationnel</span></td><td>Décrit théoriquement</td></tr>
+  </table>
+
+  <h3 id="stack">2.2 Stack technique</h3>
+  <div class="grid-2">
+    <div class="card"><h4>Backend</h4><ul><li>Laravel <strong>13</strong> (LTS)</li><li>PHP <strong>8.3</strong></li><li>MySQL <strong>8.0</strong></li><li>Apache 2.4 (Docker)</li></ul></div>
+    <div class="card"><h4>Frontend</h4><ul><li>Tailwind CSS <strong>4</strong></li><li>Vite <strong>7</strong></li><li>Blade templates</li><li>AlpineJS (animations respiration)</li></ul></div>
+    <div class="card"><h4>Tests &amp; Qualité</h4><ul><li>Pest <strong>4</strong> — 48 tests · 122 assertions</li><li>SQLite in-memory (CI)</li><li>GitHub Actions CI/CD</li></ul></div>
+    <div class="card"><h4>Infrastructure</h4><ul><li>Docker Compose (2 services)</li><li>Git + GitHub (Flow + SemVer)</li><li>Dependabot (CVE veille auto)</li></ul></div>
+  </div>
+
+  <h3 id="docker">2.3 Infrastructure Docker — Environnement TEST configuré</h3>
+  <p>L'environnement TEST est entièrement conteneurisé via Docker Compose. Il constitue l'environnement réellement mis en place et démontrable.</p>
+  <table>
+    <tr><th>Service</th><th>Image</th><th>Port exposé</th><th>Rôle</th></tr>
+    <tr><td><code>app</code></td><td>Build local (PHP 8.3 Apache + Node 20)</td><td>8080 → 80</td><td>Application Laravel + Apache</td></tr>
+    <tr><td><code>db</code></td><td><code>mysql:8.0</code></td><td>Non exposé (réseau interne)</td><td>Base de données persistante + healthcheck</td></tr>
+  </table>
+  <pre><code>#!/bin/bash
+set -e
+# Crée .env depuis .env.example si absent (secrets hors image — bonne pratique)
+[ ! -f .env ] && cp .env.example .env
+# Génère la clé applicative si absente
+[ -z "$APP_KEY" ] && php artisan key:generate --force
+# Attend MySQL (healthcheck) puis migre automatiquement
+until php artisan migrate --force 2>&1; do
+    echo "Base de données non disponible, nouvelle tentative dans 3s..."; sleep 3
+done
+# Données de démo si DB_SEED=true
+if [ "${DB_SEED:-false}" = "true" ]; then php artisan db:seed --force; fi
+exec apache2-foreground</code></pre>
+  <div class="callout success">
+    <div class="callout-title">Accès de démonstration — http://localhost:8080</div>
+    Admin : admin@cesizen.fr / password &nbsp;|&nbsp; Utilisateur : user@cesizen.fr / password
+  </div>
+  <div class="page-footer">
+    <span>CESIZen — Dossier Technique · Soutenance INFCDAAL3</span>
+    <span class="pf-right">Section 2 — Déploiement</span>
+  </div>
+</div>
+
+<div class="content-page page-break" id="cicd">
+  <h3>2.4 Pipeline CI/CD et pilotage de l'environnement</h3>
+  <p>Le pipeline GitHub Actions assure l'automatisation complète du cycle de vie du code, déclenché à chaque push sur <code>main</code> ou <code>develop</code>.</p>
+  <table>
+    <tr><th>Job</th><th>Déclencheur</th><th>Étapes</th><th>Critère go/no-go</th></tr>
+    <tr><td><strong>tests</strong></td><td>Push main / develop</td><td>PHP 8.3 · Composer · SQLite · <code>php artisan test</code></td><td>48/48 tests passent</td></tr>
+    <tr><td><strong>docker</strong></td><td><code>needs: tests</code></td><td><code>docker build -t cesizen-app .</code></td><td>Build sans erreur</td></tr>
+  </table>
+  <div class="callout warning">
+    <div class="callout-title">Critère go/no-go</div>
+    Si un seul test échoue dans le job <code>tests</code>, le job <code>docker</code> est annulé automatiquement. Aucun code cassé ne peut atteindre l'environnement TEST.
+  </div>
+
+  <h4>Pilotage et supervision de l'environnement déployé</h4>
+  <table>
+    <tr><th>Niveau</th><th>Outil</th><th>Indicateurs surveillés</th></tr>
+    <tr><td>Logs applicatifs</td><td><code>docker compose logs app</code> · <code>storage/logs/laravel.log</code></td><td>Erreurs PHP, exceptions, requêtes échouées</td></tr>
+    <tr><td>Disponibilité</td><td>Monitoring HTTP (uptime check)</td><td>Code HTTP 200, temps de réponse</td></tr>
+    <tr><td>CI/CD</td><td>GitHub Actions — onglet Actions</td><td>Statut des runs, durée, taux de réussite</td></tr>
+    <tr><td>Dépendances</td><td>Dependabot (GitHub Security)</td><td>CVE détectées, mises à jour disponibles</td></tr>
+    <tr><td>Versioning</td><td>Git log · Tags SemVer</td><td>Historique déploiements, rollback possible</td></tr>
+  </table>
+
+  <h4>Versioning des sources — Git Flow + SemVer</h4>
+  <pre><code>main        ← code stable, livré en production — tag SemVer v1.0.0
+  └── develop  ← intégration continue des développements
+        └── feature/*  ← fonctionnalité isolée, créée depuis develop
+
+Flux : feature/* → PR → develop → PR → main → git tag v1.0.0</code></pre>
+  <p>Convention de commit : <strong>Conventional Commits</strong> (<code>feat:</code> <code>fix:</code> <code>docs:</code> <code>test:</code> <code>chore:</code>). Chaque merge sur <code>main</code> est taggé selon <strong>Semantic Versioning</strong> : MAJEUR.MINEUR.PATCH.</p>
+  <div class="page-footer">
+    <span>CESIZen — Dossier Technique · Soutenance INFCDAAL3</span>
+    <span class="pf-right">Section 2 — Déploiement</span>
+  </div>
+</div>
+
+<!-- ══ SECTION 3 — SÉCURISATION ══ -->
+<div class="content-page page-break" id="securisation">
+  <div class="section-header"><div class="section-num">3</div><h2>Plan de sécurisation</h2></div>
+
+  <h3 id="criticite">3.1 Matrice des vulnérabilités et calculs de criticité (P × I)</h3>
+  <p>Méthode : <strong>Criticité = Probabilité (P) × Impact (I)</strong>, échelle 1–5 pour chaque dimension.</p>
+  <div class="grid-2" style="margin-bottom:14px;">
+    <div class="card" style="font-size:9pt;">
+      <h4>Échelle de probabilité (P)</h4>
+      <ul>
+        <li>P1 : Très improbable (&lt;10%)</li>
+        <li>P2 : Improbable (10–30%)</li>
+        <li>P3 : Possible (30–60%)</li>
+        <li>P4 : Probable (60–80%)</li>
+        <li>P5 : Très probable (&gt;80%)</li>
+      </ul>
+    </div>
+    <div class="card" style="font-size:9pt;">
+      <h4>Interprétation du score</h4>
+      <ul>
+        <li>1–4 : <span class="crit-faible">FAIBLE</span></li>
+        <li>5–9 : <span class="crit-moyen">MOYEN</span></li>
+        <li>10–15 : <span class="crit-eleve">ÉLEVÉ</span></li>
+        <li>16–25 : <span class="crit-critique">CRITIQUE</span></li>
+      </ul>
+    </div>
+  </div>
+  <table>
+    <tr><th>#</th><th>Vulnérabilité</th><th>Réf. OWASP</th><th>P</th><th>I</th><th>Criticité</th><th>Niveau</th><th>Traitement</th></tr>
+    <tr><td>V01</td><td>Brute-force sur /connexion</td><td>A07:2021</td><td>4</td><td>4</td><td><strong>16</strong></td><td><span class="crit-critique">CRITIQUE</span></td><td>throttle:5,1 → HTTP 429 ✓</td></tr>
+    <tr><td>V02</td><td>Exposition des secrets (.env)</td><td>A05:2021</td><td>3</td><td>5</td><td><strong>15</strong></td><td><span class="crit-eleve">ÉLEVÉ</span></td><td>.gitignore + .dockerignore ✓</td></tr>
+    <tr><td>V03</td><td>Mode debug en production</td><td>A05:2021</td><td>3</td><td>4</td><td><strong>12</strong></td><td><span class="crit-eleve">ÉLEVÉ</span></td><td>APP_DEBUG=false ✓</td></tr>
+    <tr><td>V04</td><td>Injection XSS (paramètres JS)</td><td>A03:2021</td><td>3</td><td>4</td><td><strong>12</strong></td><td><span class="crit-eleve">ÉLEVÉ</span></td><td>cast (int) + Blade {{ }} + CSP ✓</td></tr>
+    <tr><td>V05</td><td>Mots de passe faibles / compromis</td><td>A02:2021</td><td>3</td><td>4</td><td><strong>12</strong></td><td><span class="crit-eleve">ÉLEVÉ</span></td><td>bcrypt 12 rounds ✓</td></tr>
+    <tr><td>V06</td><td>Injection SQL</td><td>A03:2021</td><td>2</td><td>5</td><td><strong>10</strong></td><td><span class="crit-eleve">ÉLEVÉ</span></td><td>Eloquent ORM (requêtes préparées) ✓</td></tr>
+    <tr><td>V07</td><td>Accès non autorisé routes admin</td><td>A01:2021</td><td>2</td><td>5</td><td><strong>10</strong></td><td><span class="crit-eleve">ÉLEVÉ</span></td><td>Middleware auth + rôles ✓</td></tr>
+    <tr><td>V08</td><td>Contrefaçon de requête CSRF</td><td>A01:2021</td><td>3</td><td>3</td><td><strong>9</strong></td><td><span class="crit-moyen">MOYEN</span></td><td>Token @csrf sur tous formulaires ✓</td></tr>
+    <tr><td>V09</td><td>Vol de session utilisateur</td><td>A07:2021</td><td>2</td><td>4</td><td><strong>8</strong></td><td><span class="crit-moyen">MOYEN</span></td><td>Sessions sécurisées Laravel ✓</td></tr>
+    <tr><td>V10</td><td>Clickjacking (iframe)</td><td>A05:2021</td><td>2</td><td>3</td><td><strong>6</strong></td><td><span class="crit-moyen">MOYEN</span></td><td>X-Frame-Options: SAMEORIGIN ✓</td></tr>
+    <tr><td>V11</td><td>MIME sniffing</td><td>A05:2021</td><td>2</td><td>2</td><td><strong>4</strong></td><td><span class="crit-faible">FAIBLE</span></td><td>X-Content-Type-Options: nosniff ✓</td></tr>
+    <tr><td>V12</td><td>Chargement ressources tierces</td><td>A05:2021</td><td>2</td><td>3</td><td><strong>6</strong></td><td><span class="crit-moyen">MOYEN</span></td><td>Content-Security-Policy: default-src 'self' ✓</td></tr>
+  </table>
+  <div class="callout success">
+    <div class="callout-title">Couverture : 12/12 vulnérabilités traitées — 100% (objectif grille : 75%)</div>
+    Toutes les vulnérabilités ont une action corrective implémentée et testée (48 tests automatisés dont 4 tests de sécurité dédiés).
+  </div>
+  <div class="page-footer">
+    <span>CESIZen — Dossier Technique · Soutenance INFCDAAL3</span>
+    <span class="pf-right">Section 3 — Sécurisation</span>
+  </div>
+</div>
+
+<div class="content-page page-break" id="actions-correctives">
+  <h3>3.2 Actions correctives et préventives</h3>
+  <table>
+    <tr><th>Vulnérabilité</th><th>Action corrective (déjà implémentée)</th><th>Action préventive</th></tr>
+    <tr><td>V01 — Brute-force</td><td>throttle:5,1 sur /connexion et /api/login</td><td>Monitoring des logs 429 ; alertes automatiques</td></tr>
+    <tr><td>V02 — Secrets exposés</td><td>.env dans .gitignore + .dockerignore ; .env.example sans valeurs</td><td>Audit régulier du git log ; GitHub Secret Scanning</td></tr>
+    <tr><td>V03 — Mode debug</td><td>APP_DEBUG=false dans .env.example</td><td>Vérification avant chaque déploiement prod</td></tr>
+    <tr><td>V04 — XSS</td><td>cast (int) dans BreathingController ; Blade {{ }} auto-escape ; CSP</td><td>Code review obligatoire sur toute sortie HTML</td></tr>
+    <tr><td>V05 — MDP faibles</td><td>bcrypt 12 rounds via cast 'hashed' sur modèle User</td><td>Politique de complexité à ajouter en production</td></tr>
+    <tr><td>V06 — SQL injection</td><td>Eloquent ORM avec requêtes préparées PDO</td><td>Pas de concaténation SQL manuelle — code review</td></tr>
+    <tr><td>V07 — Accès admin</td><td>Middleware auth sur toutes routes protégées ; rôles admin/user</td><td>Tests d'accès dans la suite Pest (AuthTest)</td></tr>
+    <tr><td>V08 — CSRF</td><td>@csrf token sur tous les formulaires POST</td><td>Vérification automatique par le middleware Laravel</td></tr>
+    <tr><td>V09 — Vol session</td><td>Sessions Laravel chiffrées (APP_KEY) ; expiration automatique</td><td>Session httpOnly et secure en HTTPS prod</td></tr>
+    <tr><td>V10 — Clickjacking</td><td>X-Frame-Options: SAMEORIGIN</td><td>CSP frame-ancestors 'none' en complément</td></tr>
+    <tr><td>V11 — MIME sniffing</td><td>X-Content-Type-Options: nosniff</td><td>Content-Type explicite sur toutes les réponses API</td></tr>
+    <tr><td>V12 — Ressources tierces</td><td>Content-Security-Policy: default-src 'self'</td><td>Durcissement progressif (suppression unsafe-inline)</td></tr>
+  </table>
+
+  <h3 id="chiffrement">3.3 Solutions de chiffrement et cryptage</h3>
+  <table>
+    <tr><th>Donnée / Canal</th><th>Solution</th><th>Détail technique</th></tr>
+    <tr><td>Mots de passe</td><td>Hachage bcrypt</td><td>12 rounds, salage automatique, irréversible. Cast <code>'hashed'</code> sur le modèle User.</td></tr>
+    <tr><td>Sessions et cookies</td><td>Chiffrement AES-256-CBC</td><td>Laravel chiffre automatiquement avec l'APP_KEY (256 bits).</td></tr>
+    <tr><td>Données en transit (PROD)</td><td>TLS 1.3 — HTTPS</td><td>Certificat Let's Encrypt (gratuit, renouvellement auto). En TEST : HTTP local (réseau fermé).</td></tr>
+    <tr><td>Clé applicative</td><td>APP_KEY — 32 octets aléatoires</td><td>Générée par <code>php artisan key:generate</code>, stockée dans .env (hors git).</td></tr>
+    <tr><td>Tokens API</td><td>Hash SHA-256</td><td>Tokens stockés hashés en base (champ api_token).</td></tr>
+  </table>
+  <div class="callout info">
+    <div class="callout-title">HTTPS en production</div>
+    En environnement TEST Docker (local), les échanges sont en HTTP car le réseau est fermé. En production réelle, HTTPS avec TLS 1.3 et HSTS est obligatoire.
+  </div>
+  <div class="page-footer">
+    <span>CESIZen — Dossier Technique · Soutenance INFCDAAL3</span>
+    <span class="pf-right">Section 3 — Sécurisation</span>
+  </div>
+</div>
+
+<!-- GESTION DE CRISE -->
+<div class="content-page page-break" id="gestion-crise">
+  <h3>3.4 Gestion de crise — Escalade, responsabilités et communication</h3>
+  <p>Ce plan définit la réponse à tout incident de sécurité avéré. Il suit le cycle <strong>Détecter → Classer → Confiner → Corriger → Communiquer → Post-mortem</strong>.</p>
+
+  <h4>Processus de réponse à incident</h4>
+  <div class="escalade-step">
+    <div class="step-time">H+0</div>
+    <div><strong>Détection.</strong> Monitoring des logs Apache/PHP/MySQL, alerte GitHub Security (Dependabot), signalement via le template "Incident de sécurité" sur GitHub Issues.</div>
+  </div>
+  <div class="escalade-step">
+    <div class="step-time">H+15 min</div>
+    <div><strong>Classification.</strong> Le responsable technique qualifie l'incident (P1/P2/P3) et ouvre le ticket GitHub Issues avec le label approprié.</div>
+  </div>
+  <div class="escalade-step">
+    <div class="step-time">H+30 min</div>
+    <div><strong>Notification interne.</strong> Escalade selon la criticité. Pour P1 Critique : Direction notifiée, DPO contacté si des données personnelles sont impliquées.</div>
+  </div>
+  <div class="escalade-step">
+    <div class="step-time">H+1h</div>
+    <div><strong>Confinement.</strong> Mise en maintenance (page 503), révocation des sessions actives (<code>php artisan auth:clear-resets</code>), blocage de l'IP attaquante.</div>
+  </div>
+  <div class="escalade-step">
+    <div class="step-time">H+3h (P1)</div>
+    <div><strong>Correction.</strong> Branche <code>hotfix/CVE-XXXX</code> depuis <code>main</code>, correction, PR → revue → merge, tag SemVer patch (v1.0.1). CI/CD rebuild automatique.</div>
+  </div>
+  <div class="escalade-step">
+    <div class="step-time">&lt;72h</div>
+    <div><strong>Communication externe (si violation RGPD).</strong> Notification à la CNIL dans les 72h (Art. 33). Email aux utilisateurs concernés (Art. 34). Message de transparence sur le site.</div>
+  </div>
+  <div class="escalade-step">
+    <div class="step-time">J+7</div>
+    <div><strong>Post-mortem.</strong> Rapport documenté dans le ticket GitHub. Identification des causes racines. Actions préventives supplémentaires.</div>
+  </div>
+
+  <h4>Matrice d'escalade</h4>
+  <table>
+    <tr><th>Criticité</th><th>Définition</th><th>Responsable</th><th>Notifications</th><th>Délai correction</th></tr>
+    <tr><td><span class="crit-critique">P1 Critique</span></td><td>Service indisponible ou violation de données</td><td>Responsable technique</td><td>Direction + DPO si RGPD</td><td>&lt; 3h ouvrées</td></tr>
+    <tr><td><span class="crit-eleve">P2 Majeur</span></td><td>Fonctionnalité principale compromise</td><td>Développeur</td><td>Responsable technique</td><td>&lt; 24h ouvrées</td></tr>
+    <tr><td><span class="crit-moyen">P3 Mineur</span></td><td>Anomalie sans impact métier immédiat</td><td>Développeur</td><td>Log interne</td><td>Sprint suivant</td></tr>
+  </table>
+
+  <h4>Communication externe — Messages types</h4>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Pendant l'incident (site en maintenance)</h4>
+      <p style="font-size:9pt;font-style:italic;">"CESIZen est temporairement indisponible pour maintenance urgente de sécurité. Nous travaillons à rétablir le service dans les plus brefs délais."</p>
+    </div>
+    <div class="card">
+      <h4>Après résolution (email utilisateurs)</h4>
+      <p style="font-size:9pt;font-style:italic;">"Cher utilisateur, nous avons détecté et corrigé un incident de sécurité le [DATE]. La CNIL a été notifiée conformément à l'article 33 du RGPD."</p>
+    </div>
+  </div>
+  <div class="callout danger">
+    <div class="callout-title">Obligation RGPD — Articles 33 et 34</div>
+    En cas de violation de données personnelles : notification à la CNIL sous <strong>72 heures</strong>. En cas d'impact sur les droits et libertés des personnes : notification aux utilisateurs sous <strong>72 heures</strong>.
+  </div>
+  <div class="page-footer">
+    <span>CESIZen — Dossier Technique · Soutenance INFCDAAL3</span>
+    <span class="pf-right">Section 3 — Sécurisation</span>
+  </div>
+</div>
+
+<!-- RGPD -->
+<div class="content-page page-break" id="rgpd">
+  <h3>3.5 Données personnelles et conformité RGPD</h3>
+  <table>
+    <tr><th>Principe RGPD</th><th>Mise en œuvre dans CESIZen</th><th>Outil / Mécanisme</th></tr>
+    <tr><td>Minimisation des données (Art. 5)</td><td>Seuls nom, email, MDP hashé collectés. Aucun tracking, aucune donnée de santé réelle.</td><td>Modèle User — champs fillable limités</td></tr>
+    <tr><td>Conservation limitée (Art. 5)</td><td>Comptes inactifs &gt;3 ans supprimés. Sessions expirées &gt;90 jours purgées.</td><td>Commande artisan planifiée (PROD)</td></tr>
+    <tr><td>Droit d'accès (Art. 15)</td><td>Profil complet consultable dans l'espace personnel</td><td>Route /profil (utilisateur connecté)</td></tr>
+    <tr><td>Droit de rectification (Art. 16)</td><td>Modification nom, email, mot de passe depuis le profil</td><td>Formulaire de mise à jour du profil</td></tr>
+    <tr><td>Droit à l'effacement (Art. 17)</td><td>Désactivation + suppression de compte par l'administrateur</td><td>Back-office admin → action de suppression</td></tr>
+    <tr><td>Sécurité des données (Art. 32)</td><td>Bcrypt 12 rounds, HTTPS prod, APP_DEBUG=false, secrets hors git</td><td>SecurityHeadersMiddleware + .env.example</td></tr>
+    <tr><td>Notification violation (Art. 33/34)</td><td>Procédure définie : CNIL &lt;72h, utilisateurs &lt;72h</td><td>Plan de gestion de crise (section 3.4)</td></tr>
+  </table>
+  <div class="callout warning">
+    <div class="callout-title">Limitation pédagogique</div>
+    Ce projet étant éducatif, il n'y a pas de DPO désigné ni de politique de confidentialité publiée. En production réelle, ces éléments seraient obligatoires (Art. 37 — DPO, Art. 13 — politique de confidentialité).
+  </div>
+
+  <h3 id="bonnes-pratiques">3.6 Bonnes pratiques de développement</h3>
+  <table>
+    <tr><th>Pratique</th><th>Outil / Convention</th><th>Valeur ajoutée</th></tr>
+    <tr><td>Versioning sémantique</td><td>SemVer (MAJEUR.MINEUR.PATCH)</td><td>Lisibilité immédiate de l'ampleur d'un changement</td></tr>
+    <tr><td>Messages de commit</td><td>Conventional Commits</td><td>CHANGELOG auto-générable, historique lisible</td></tr>
+    <tr><td>Branches</td><td>Git Flow simplifié (main/develop/feature/*)</td><td>Isolation des développements, PR traçables</td></tr>
+    <tr><td>Code review</td><td>Pull Requests GitHub avec template checklist</td><td>Validation tests + sécurité avant merge</td></tr>
+    <tr><td>Documentation</td><td>README.md complet, dossier technique PDF</td><td>Onboarding rapide, traçabilité des décisions</td></tr>
+    <tr><td>Secrets</td><td>.gitignore + .dockerignore + .env.example</td><td>Aucun secret dans l'historique git ou l'image Docker</td></tr>
+    <tr><td>Dépendances</td><td>Dependabot hebdomadaire (Composer + npm)</td><td>Veille CVE automatisée, PRs de mise à jour</td></tr>
+    <tr><td>Tests automatisés</td><td>Pest 4 — 48 tests en CI</td><td>Régressions détectées avant intégration</td></tr>
+  </table>
+  <div class="page-footer">
+    <span>CESIZen — Dossier Technique · Soutenance INFCDAAL3</span>
+    <span class="pf-right">Section 3 — Sécurisation</span>
+  </div>
+</div>
+
+<!-- ══ SECTION 4 — MAINTENANCE ══ -->
+<div class="content-page page-break" id="maintenance">
+  <div class="section-header"><div class="section-num">4</div><h2>Plan de maintenance et pérennité</h2></div>
+
+  <h3 id="ticketing">4.1 Outil de gestion — GitHub Issues &amp; Projects</h3>
+  <p>L'outil de ticketing retenu est <strong>GitHub Issues</strong> couplé à un board <strong>GitHub Projects</strong>. Ce choix centralise tout dans le même outil que le code source et le CI/CD, garantissant la traçabilité complète (ticket → commit → PR → merge).</p>
+  <table>
+    <tr><th>Composant</th><th>Configuration</th><th>Acteurs</th></tr>
+    <tr><td>GitHub Issues</td><td>Labels : bug, amélioration, bloquant-critique, bloquant-majeur, mineur, sécurité, RGPD</td><td>Prestataire (dev) + Client (Ministère)</td></tr>
+    <tr><td>GitHub Projects</td><td>Board Kanban 4 colonnes : Backlog → En cours → En revue → Terminé</td><td>Prestataire (pilotage)</td></tr>
+    <tr><td>Templates Issues</td><td><code>bug_report.md</code> + <code>feature_request.md</code> pré-remplis</td><td>Client (saisie guidée)</td></tr>
+    <tr><td>PR Template</td><td>Checklist obligatoire : tests · sécurité · revue · SemVer</td><td>Prestataire (validation)</td></tr>
+    <tr><td>Dependabot</td><td>PRs automatiques Composer + npm hebdo, GitHub Actions mensuel</td><td>Automatique (veille CVE)</td></tr>
+  </table>
+
+  <h4>Cycle de vie d'un ticket — Prestataire ↔ Client</h4>
+  <ol>
+    <li><strong>Signalement</strong> : Le client ouvre un ticket via le template GitHub Issues (étapes de reproduction, criticité, environnement)</li>
+    <li><strong>Qualification</strong> : Le prestataire labellise le ticket (&lt;1h pour bloquant critique) et l'ajoute au board</li>
+    <li><strong>Traitement</strong> : Branche feature/ ou fix/ créée, développement, tests passants</li>
+    <li><strong>Revue</strong> : Pull Request ouverte, checklist validée, code review</li>
+    <li><strong>Livraison</strong> : Merge main, tag SemVer, fermeture automatique du ticket (<code>Fixes #XX</code>)</li>
+    <li><strong>Validation client</strong> : Démonstration sur l'environnement TEST Docker</li>
+  </ol>
+
+  <h3 id="sla">4.2 Méthodologie et SLA par criticité</h3>
+  <table>
+    <tr><th>Criticité</th><th>Définition</th><th>Prise en compte</th><th>Correction</th><th>Exemple concret</th></tr>
+    <tr><td><span class="badge red">Bloquant critique</span></td><td>Service indisponible / perte données</td><td>&lt; 1h</td><td>&lt; 3h ouvrées</td><td>Erreur 500 sur /connexion</td></tr>
+    <tr><td><span class="badge orange">Bloquant majeur</span></td><td>Fonctionnalité principale dégradée</td><td>&lt; 4h</td><td>&lt; 24h ouvrées</td><td>Exercice de respiration planté</td></tr>
+    <tr><td><span class="badge blue">Mineur</span></td><td>Gêne sans impact métier</td><td>&lt; 48h</td><td>Prochain sprint</td><td>Faute d'orthographe</td></tr>
+  </table>
+
+  <h3 id="dependabot">4.3 Veille technologique — Dependabot</h3>
+  <p>Dependabot surveille automatiquement les dépendances et crée des PRs GitHub à chaque mise à jour disponible. Processus de validation :</p>
+  <ol>
+    <li>Dependabot crée une PR avec la mise à jour</li>
+    <li>GitHub Actions déclenche les 48 tests sur la PR</li>
+    <li>Le développeur vérifie le CHANGELOG de la dépendance</li>
+    <li>Si les tests passent et le CHANGELOG ne signale pas de rupture → merge</li>
+    <li>Si rupture : migration adaptée avant merge</li>
+  </ol>
+  <pre><code># .github/dependabot.yml
+version: 2
+updates:
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule: { interval: "weekly" }
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule: { interval: "weekly" }
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule: { interval: "monthly" }</code></pre>
+  <div class="page-footer">
+    <span>CESIZen — Dossier Technique · Soutenance INFCDAAL3</span>
+    <span class="pf-right">Section 4 — Maintenance</span>
+  </div>
+</div>
+
+<!-- ══ SECTION 5 — TESTS ══ -->
+<div class="content-page page-break" id="tests">
+  <div class="section-header"><div class="section-num">5</div><h2>Tests automatisés — 48 tests · 122 assertions</h2></div>
+  <div class="callout success">
+    <div class="callout-title">Résultat final — Juillet 2026</div>
+    Tests : <strong>48 passés</strong> (0 échoué) · Assertions : <strong>122</strong> · Durée : ~2.5s · CI GitHub Actions : ✅ success
+  </div>
+  <table>
+    <tr><th>Suite</th><th>Fichier</th><th>Tests</th><th>Couverture</th></tr>
+    <tr><td>Unit / Modèles</td><td>BreathingExerciseModelTest</td><td>3</td><td>getCycleDuration, scope active, relation</td></tr>
+    <tr><td>Unit / Modèles</td><td>UserModelTest</td><td>4</td><td>isAdmin, hash password, fillable</td></tr>
+    <tr><td>Unit / Modèles</td><td>InformationPageModelTest</td><td>2</td><td>scope published, scope ordered</td></tr>
+    <tr><td>Feature / Auth</td><td>AuthTest</td><td>13</td><td>Inscription, connexion, profil, admin, permissions</td></tr>
+    <tr><td>Feature / Respiration</td><td>BreathingTest</td><td>12</td><td>CRUD exercices, sessions, paramètres custom</td></tr>
+    <tr><td>Feature / Information</td><td>InformationTest</td><td>6</td><td>CRUD pages, accès public/admin</td></tr>
+    <tr><td>Feature / <strong>Sécurité</strong></td><td>SecurityTest</td><td><strong>4</strong></td><td>En-têtes HTTP (+ CSP), throttle 429, XSS</td></tr>
+    <tr><td>Examples</td><td>ExampleTest × 2</td><td>4</td><td>Sanity checks</td></tr>
+    <tr><td colspan="2"><strong>TOTAL</strong></td><td><strong>48</strong></td><td><strong>122 assertions · 2.5s · 0 échec</strong></td></tr>
+  </table>
+  <div class="page-footer">
+    <span>CESIZen — Dossier Technique · Soutenance INFCDAAL3</span>
+    <span class="pf-right">Section 5 — Tests</span>
+  </div>
+</div>
+
+<!-- ══ SECTION 6 — ROLLBACK ══ -->
+<div class="content-page page-break" id="rollback">
+  <div class="section-header"><div class="section-num">6</div><h2>Procédure de rollback</h2></div>
+  <h4>Niveau 1 — Rollback du code</h4>
+  <pre><code># Option A : Annuler un commit (préserve l'historique)
+git revert &lt;hash-du-commit-problématique&gt;
+git push origin main
+
+# Option B : Retour à un tag stable
+git checkout v1.0.0 && git push origin main --force</code></pre>
+  <h4>Niveau 2 — Rollback base de données</h4>
+  <pre><code>php artisan migrate:rollback
+mysql -u root -p cesizen_prod &lt; backup_avant_migration.sql</code></pre>
+  <table>
+    <tr><th>Scénario</th><th>Délai déclenchement</th><th>Action</th></tr>
+    <tr><td>Erreur 500 en production</td><td>Immédiat (&lt;5 min)</td><td>Rollback code + redémarrage</td></tr>
+    <tr><td>Régression fonctionnelle majeure</td><td>&lt;30 min après constat</td><td>Rollback code</td></tr>
+    <tr><td>Corruption de données</td><td>Immédiat</td><td>Rollback BDD depuis backup</td></tr>
+    <tr><td>Vulnérabilité critique (CVE)</td><td>Immédiat + maintenance</td><td>Rollback + patch hotfix</td></tr>
+  </table>
+  <div class="page-footer">
+    <span>CESIZen — Dossier Technique · Soutenance INFCDAAL3</span>
+    <span class="pf-right">Section 6 — Rollback</span>
+  </div>
+</div>
+
+<!-- ══ SECTION 7 — CONCLUSION ══ -->
+<div class="content-page page-break" id="conclusion">
+  <div class="section-header"><div class="section-num">7</div><h2>Conclusion</h2></div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Déploiement</h4>
+      <ul>
+        <li>3 environnements décrits (DEV/TEST/PROD)</li>
+        <li>Docker Compose opérationnel (port 8080)</li>
+        <li>Pipeline CI/CD GitHub Actions (2 jobs)</li>
+        <li>Rollback documenté (code + BDD)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Sécurité</h4>
+      <ul>
+        <li>12 vulnérabilités analysées (matrice P×I)</li>
+        <li>12/12 actions correctives implémentées</li>
+        <li>5 en-têtes HTTP de sécurité (dont CSP)</li>
+        <li>Plan de gestion de crise formalisé (7 étapes)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Maintenance</h4>
+      <ul>
+        <li>GitHub Issues + Projects configurés</li>
+        <li>SLA formalisé par criticité</li>
+        <li>Dependabot veille hebdomadaire</li>
+        <li>Cycle prestataire ↔ client documenté</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Qualité</h4>
+      <ul>
+        <li>48 tests automatisés (122 assertions)</li>
+        <li>Conventional Commits + SemVer v1.0.0</li>
+        <li>Git Flow structuré</li>
+        <li>RGPD Art. 5, 15, 16, 17, 32, 33, 34</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout success" style="margin-top:24px;">
+    <div class="callout-title">État final — Juillet 2026</div>
+    <ul>
+      <li>48/48 tests passent en CI (GitHub Actions ✅ success)</li>
+      <li>Application Docker : http://localhost:8080 — données démo disponibles</li>
+      <li>Code source : github.com/louisbeaujoin/cesizen · v1.0.0</li>
+    </ul>
+  </div>
+  <div class="page-footer">
+    <span>CESIZen — Dossier Technique · Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="pf-right">Louis Beaujoin · CDA CESI · Juillet 2026</span>
+  </div>
+</div>
+
+</body>
+</html>

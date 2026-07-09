@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>CESIZen — Soutenance Bloc 3 INFCDAAL3</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11pt; color: #232328; }
+
+/* Palette de référence — Soutenance_INFCDAAL3_RESources_Relationnelles.pptx */
+:root {
+  --dark:   #1D1D1B;
+  --dark2:  #232328;
+  --yellow: #FAE510;
+  --gray:   #6E6E78;
+  --white:  #FFFFFF;
+  --light:  #F8F8F5;
+  --light2: #EEEEEA;
+}
+
+.slide {
+  width: 297mm;
+  height: 210mm;
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  overflow: hidden;
+  background: var(--white);
+  position: relative;
+}
+
+/* ── SLIDE TITRE ── */
+.slide-title { flex-direction: row; }
+.title-left {
+  background: var(--dark);
+  width: 42%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 44px 40px;
+}
+.title-left .logo {
+  font-size: 46pt;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -2px;
+  line-height: 1;
+}
+.title-left .logo em { color: var(--yellow); font-style: normal; }
+.title-left .yellow-bar { width: 56px; height: 4px; background: var(--yellow); margin: 18px 0; }
+.title-left .tagline {
+  font-size: 9pt;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.5;
+}
+.title-left .author {
+  margin-top: 28px;
+  font-size: 10pt;
+  color: var(--yellow);
+  font-weight: 700;
+}
+.title-left .date {
+  font-size: 8.5pt;
+  color: var(--gray);
+  margin-top: 4px;
+}
+.title-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 44px 44px;
+  background: var(--white);
+}
+.title-right h1 {
+  font-size: 16pt;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.4;
+  margin-bottom: 28px;
+  border-left: 4px solid var(--yellow);
+  padding-left: 14px;
+}
+.title-right .stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.title-right .stat-box {
+  background: var(--light);
+  border-left: 3px solid var(--yellow);
+  padding: 10px 14px;
+}
+.title-right .stat-box .val {
+  font-size: 20pt;
+  font-weight: 900;
+  color: var(--dark);
+  display: block;
+  line-height: 1;
+}
+.title-right .stat-box .lbl {
+  font-size: 7.5pt;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+  display: block;
+}
+.title-right .bloc-badge {
+  margin-top: 20px;
+  display: inline-block;
+  background: var(--dark);
+  color: var(--yellow);
+  font-size: 8pt;
+  font-weight: 700;
+  padding: 5px 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ── SLIDE TDM ── */
+.slide-toc .toc-header {
+  background: var(--dark);
+  color: var(--white);
+  padding: 22px 44px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.slide-toc .toc-header h2 { font-size: 16pt; font-weight: 700; }
+.slide-toc .toc-header .slide-num {
+  margin-left: auto;
+  font-size: 8.5pt;
+  color: var(--gray);
+}
+.slide-toc .toc-body { padding: 20px 44px; flex: 1; }
+.toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--light);
+  border-left: 3px solid var(--dark);
+  text-decoration: none;
+  color: var(--dark2);
+  font-size: 9pt;
+  font-weight: 500;
+}
+.toc-item:hover { background: var(--light2); }
+.toc-num {
+  background: var(--yellow);
+  color: var(--dark);
+  font-weight: 800;
+  font-size: 8.5pt;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.slide-toc .slide-footer { border-top: 1px solid var(--light2); }
+
+/* ── EN-TÊTE SLIDES STANDARDS ── */
+.slide-header {
+  background: var(--dark);
+  color: var(--white);
+  height: 58px;
+  padding: 0 44px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.slide-header h2 { font-size: 14pt; font-weight: 700; flex: 1; }
+.grille-badge {
+  background: var(--yellow);
+  color: var(--dark);
+  font-size: 7pt;
+  font-weight: 700;
+  padding: 4px 10px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.slide-num-badge {
+  font-size: 8pt;
+  color: var(--gray);
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+/* ── CORPS ── */
+.slide-body {
+  flex: 1;
+  padding: 18px 44px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.slide-body.two-col { flex-direction: row; gap: 28px; }
+.col { flex: 1; overflow: hidden; }
+
+/* ── PIED DE PAGE ── */
+.slide-footer {
+  height: 26px;
+  padding: 0 44px;
+  border-top: 1px solid #E4E4DC;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  background: var(--white);
+}
+.slide-footer .footer-text {
+  font-size: 7pt;
+  color: var(--gray);
+}
+.slide-footer .footer-num {
+  font-size: 8pt;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* ── SLIDE FINALE ── */
+.slide-final {
+  background: var(--dark);
+  color: var(--white);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 48px;
+}
+.slide-final .yellow-bar { width: 64px; height: 4px; background: var(--yellow); margin: 0 auto 28px; }
+.slide-final h2 { font-size: 24pt; font-weight: 800; margin-bottom: 8px; }
+.slide-final h2 em { color: var(--yellow); font-style: normal; }
+.slide-final .subtitle { font-size: 10pt; color: var(--gray); margin-bottom: 34px; }
+.slide-final .checks { display: flex; flex-direction: column; gap: 9px; text-align: left; max-width: 520px; margin: 0 auto; }
+.slide-final .check { display: flex; align-items: flex-start; gap: 10px; font-size: 9pt; }
+.slide-final .check .bullet { width: 12px; height: 12px; background: var(--yellow); flex-shrink: 0; margin-top: 2px; }
+.slide-final .url { margin-top: 28px; font-size: 7.5pt; color: var(--gray); }
+
+/* ── ÉLÉMENTS CONTENU ── */
+h3 {
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 14px 0 8px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--yellow);
+  display: inline-block;
+}
+h4 { font-size: 9.5pt; font-weight: 700; color: var(--dark2); margin: 10px 0 6px; }
+p { font-size: 9pt; margin-bottom: 7px; color: var(--dark2); line-height: 1.45; }
+ul, ol { margin-left: 16px; }
+li { font-size: 9pt; margin-bottom: 5px; color: var(--dark2); line-height: 1.35; }
+li strong { color: var(--dark); }
+
+table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 8.5pt; }
+th { background: var(--dark); color: var(--white); padding: 7px 9px; text-align: left; font-weight: 600; font-size: 8pt; }
+td { padding: 6px 9px; border-bottom: 1px solid #E4E4DC; vertical-align: top; }
+tr:nth-child(even) { background: var(--light); }
+
+pre {
+  background: var(--dark);
+  color: #D8D8D0;
+  padding: 10px 12px;
+  font-size: 7.5pt;
+  margin: 8px 0;
+  line-height: 1.5;
+  border-left: 3px solid var(--yellow);
+}
+code {
+  background: var(--light);
+  color: var(--dark);
+  padding: 1px 5px;
+  font-size: 8pt;
+}
+pre code { background: none; color: inherit; padding: 0; }
+
+.card {
+  background: var(--light);
+  border: 1px solid #E4E4DC;
+  border-left: 3px solid var(--yellow);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+.card h4 { margin-top: 0; color: var(--dark); }
+
+.badge { display: inline-block; padding: 2px 7px; font-size: 7.5pt; font-weight: 700; }
+.badge.green { background: #D4EDDA; color: #155724; }
+.badge.blue  { background: #D1ECF1; color: #0C5460; }
+.badge.red   { background: #F8D7DA; color: #721C24; }
+.badge.orange{ background: #FFE8D0; color: #7A3B00; }
+
+.stat {
+  text-align: center;
+  padding: 12px 8px;
+  background: var(--dark);
+  color: var(--white);
+}
+.stat .val { font-size: 20pt; font-weight: 900; color: var(--yellow); display: block; line-height: 1; }
+.stat .lbl { font-size: 7pt; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 10px 0; }
+
+.callout {
+  border-left: 4px solid var(--yellow);
+  background: var(--light);
+  padding: 9px 12px;
+  margin: 8px 0;
+}
+.callout-title { font-weight: 700; font-size: 8.5pt; margin-bottom: 4px; color: var(--dark); }
+
+.flow { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; padding: 8px 0; }
+.flow-step { background: var(--dark); color: var(--white); padding: 6px 11px; font-size: 8pt; font-weight: 600; text-align: center; }
+.flow-arrow { color: var(--yellow); font-size: 12pt; font-weight: 900; }
+
+.crit-critique { background: #7f1d1d !important; color: white !important; font-weight: 700; }
+.crit-eleve    { background: #F8D7DA !important; color: #721C24 !important; font-weight: 700; }
+.crit-moyen    { background: #FFE8D0 !important; color: #7A3B00 !important; }
+.crit-faible   { background: #D4EDDA !important; color: #155724 !important; }
+
+@page { size: A4 landscape; margin: 0; }
+@media print {
+  .title-left, .slide-header, .stat, .slide-final, pre, th, .grille-badge, .toc-num, .callout, .card {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .crit-critique, .crit-eleve, .crit-moyen, .crit-faible, .badge {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ SLIDE 1 — TITRE ══ -->
+<div class="slide slide-title" id="slide-1">
+  <div class="title-left">
+    <div class="logo">CESI<em>Zen</em></div>
+    <div class="yellow-bar"></div>
+    <div class="tagline">Plan de déploiement,<br>maintenance et sécurisation</div>
+    <div class="author">Louis Beaujoin</div>
+    <div class="date">CDA CESI · Bloc 3 · Juillet 2026</div>
+  </div>
+  <div class="title-right">
+    <h1>Déployer et sécuriser<br>une application web<br>en conditions professionnelles</h1>
+    <div class="stats-grid">
+      <div class="stat-box"><span class="val">48</span><span class="lbl">Tests CI/CD</span></div>
+      <div class="stat-box"><span class="val">v1.0.0</span><span class="lbl">Version stable</span></div>
+      <div class="stat-box"><span class="val">12</span><span class="lbl">Vulnérabilités P×I</span></div>
+      <div class="stat-box"><span class="val">Docker</span><span class="lbl">Port 8080 opérationnel</span></div>
+    </div>
+    <div class="bloc-badge">INFCDAAL3 — Soutenance Bloc 3</div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 2 — SOMMAIRE ══ -->
+<div class="slide slide-toc" id="slide-2">
+  <div class="toc-header"><h2>Sommaire</h2><span class="slide-num">Soutenance · 15 parties</span></div>
+  <div class="toc-body">
+    <a href="#slide-grille" style="display:flex;align-items:center;gap:10px;padding:7px 12px;background:var(--dark);color:var(--yellow);font-size:8.5pt;font-weight:700;margin-bottom:10px;text-decoration:none;border-left:4px solid var(--yellow);">
+      ★ Grille d'évaluation complète — 14 critères INFCDAAL3
+    </a>
+    <div class="toc-grid">
+      <a href="#slide-3"  class="toc-item"><span class="toc-num">1</span> Contexte &amp; Enjeux</a>
+      <a href="#slide-4"  class="toc-item"><span class="toc-num">2</span> Architecture &amp; Stack technique</a>
+      <a href="#slide-5"  class="toc-item"><span class="toc-num">3</span> Environnements DEV / TEST / PROD</a>
+      <a href="#slide-6"  class="toc-item"><span class="toc-num">4</span> Infrastructure Docker</a>
+      <a href="#slide-7"  class="toc-item"><span class="toc-num">5</span> Pipeline CI/CD GitHub Actions</a>
+      <a href="#slide-8"  class="toc-item"><span class="toc-num">6</span> Tests automatisés — 48 tests</a>
+      <a href="#slide-9"  class="toc-item"><span class="toc-num">7</span> Matrice de criticité (P × I)</a>
+      <a href="#slide-10" class="toc-item"><span class="toc-num">8</span> Plan de sécurisation &amp; chiffrement</a>
+      <a href="#slide-10b" class="toc-item"><span class="toc-num">9</span> Tests de sécurité automatisés</a>
+      <a href="#slide-11" class="toc-item"><span class="toc-num">10</span> Gestion de crise &amp; RGPD</a>
+      <a href="#slide-12" class="toc-item"><span class="toc-num">11</span> Ticketing &amp; SLA</a>
+      <a href="#slide-13" class="toc-item"><span class="toc-num">12</span> Rollback &amp; Résilience</a>
+      <a href="#slide-14" class="toc-item"><span class="toc-num">13</span> Git Flow &amp; Versioning</a>
+      <a href="#slide-15" class="toc-item"><span class="toc-num">14</span> Démonstration live</a>
+      <a href="#slide-16" class="toc-item"><span class="toc-num">15</span> Métriques &amp; Conclusion</a>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">·</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE GRILLE — ÉVALUATION COMPLÈTE ══ -->
+<div class="slide" id="slide-grille">
+  <div class="slide-header">
+    <h2>Grille d'évaluation — couverture complète</h2>
+    <span class="grille-badge">INFCDAAL3 · 14 critères · 100% couverts</span>
+    <span class="slide-num-badge">·</span>
+  </div>
+  <div class="slide-body two-col" style="padding:14px 32px;gap:20px;">
+
+    <!-- COLONNE GAUCHE -->
+    <div class="col">
+
+      <!-- DÉPLOIEMENT -->
+      <div style="background:var(--dark);color:var(--yellow);font-size:8pt;font-weight:800;padding:5px 10px;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase;">
+        DÉPLOIEMENT
+      </div>
+      <table style="font-size:7.8pt;margin-bottom:10px;">
+        <tr><th style="width:26px;">#</th><th>Critère</th><th style="width:90px;">Preuve clé</th><th style="width:34px;">Slide</th><th style="width:22px;">✓</th></tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C1</td>
+          <td>Cohérence avec le contexte professionnel</td>
+          <td>CESIZen — Ministère fictif, bien-être mental</td>
+          <td style="text-align:center;"><a href="#slide-3" style="color:var(--dark);font-weight:700;">S.1</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C2</td>
+          <td>Plan de déploiement complet (3 environnements)</td>
+          <td>DEV (WAMP) · TEST (Docker 8080) · PROD (RDS)</td>
+          <td style="text-align:center;"><a href="#slide-5" style="color:var(--dark);font-weight:700;">S.3</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C3</td>
+          <td>Environnement configuré et opérationnel</td>
+          <td>Docker Compose · entrypoint.sh · localhost:8080</td>
+          <td style="text-align:center;"><a href="#slide-6" style="color:var(--dark);font-weight:700;">S.4</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C4</td>
+          <td>Automatisation du déploiement (CI/CD)</td>
+          <td>GitHub Actions · 2 jobs séquentiels · needs: tests</td>
+          <td style="text-align:center;"><a href="#slide-7" style="color:var(--dark);font-weight:700;">S.5</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C5</td>
+          <td>Procédure de rollback documentée</td>
+          <td>git revert · migrate:rollback · mysqldump · critères</td>
+          <td style="text-align:center;"><a href="#slide-13" style="color:var(--dark);font-weight:700;">S.12</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+      </table>
+
+      <!-- SÉCURISATION -->
+      <div style="background:var(--dark);color:var(--yellow);font-size:8pt;font-weight:800;padding:5px 10px;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase;">
+        SÉCURISATION
+      </div>
+      <table style="font-size:7.8pt;">
+        <tr><th style="width:26px;">#</th><th>Critère</th><th style="width:90px;">Preuve clé</th><th style="width:34px;">Slide</th><th style="width:22px;">✓</th></tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C6</td>
+          <td>Identification des risques + calcul criticité (P×I)</td>
+          <td>12 vulnérabilités OWASP · méthode P×I · score 4–16</td>
+          <td style="text-align:center;"><a href="#slide-9" style="color:var(--dark);font-weight:700;">S.7</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C7</td>
+          <td>Plan de sécurisation complet (≥ 75% des risques)</td>
+          <td>12/12 traités (100%) · 5 headers · bcrypt 12 · CSP</td>
+          <td style="text-align:center;"><a href="#slide-10" style="color:var(--dark);font-weight:700;">S.8</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C8</td>
+          <td>Qualité du code sécurisé (tests automatisés)</td>
+          <td>SecurityTest.php · 4 tests · throttle · XSS · CSP</td>
+          <td style="text-align:center;"><a href="#slide-10b" style="color:var(--dark);font-weight:700;">S.9</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C9</td>
+          <td>Plan de gestion de crise + conformité RGPD</td>
+          <td>7 étapes H+0→J+7 · escalade P1/P2/P3 · CNIL &lt;72h</td>
+          <td style="text-align:center;"><a href="#slide-11" style="color:var(--dark);font-weight:700;">S.10</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+      </table>
+
+    </div>
+
+    <!-- COLONNE DROITE -->
+    <div class="col">
+
+      <!-- MAINTENANCE -->
+      <div style="background:var(--dark);color:var(--yellow);font-size:8pt;font-weight:800;padding:5px 10px;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase;">
+        MAINTENANCE
+      </div>
+      <table style="font-size:7.8pt;margin-bottom:10px;">
+        <tr><th style="width:26px;">#</th><th>Critère</th><th style="width:90px;">Preuve clé</th><th style="width:34px;">Slide</th><th style="width:22px;">✓</th></tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C10</td>
+          <td>Outil de gestion des évolutions (ticketing + SLA)</td>
+          <td>GitHub Issues · Kanban 4 colonnes · SLA · Dependabot</td>
+          <td style="text-align:center;"><a href="#slide-12" style="color:var(--dark);font-weight:700;">S.11</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C11</td>
+          <td>Outil de gestion des versions (Git + SemVer)</td>
+          <td>Git Flow · SemVer v1.0.0 · Conventional Commits</td>
+          <td style="text-align:center;"><a href="#slide-14" style="color:var(--dark);font-weight:700;">S.13</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+      </table>
+
+      <!-- TESTS -->
+      <div style="background:var(--dark);color:var(--yellow);font-size:8pt;font-weight:800;padding:5px 10px;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase;">
+        TESTS AUTOMATISÉS
+      </div>
+      <table style="font-size:7.8pt;margin-bottom:10px;">
+        <tr><th style="width:26px;">#</th><th>Critère</th><th style="width:90px;">Preuve clé</th><th style="width:34px;">Slide</th><th style="width:22px;">✓</th></tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C12</td>
+          <td>Suite de tests fonctionnelle en intégration continue</td>
+          <td>Pest · 48 tests · 122 assertions · CI ✅ · 2.5s</td>
+          <td style="text-align:center;"><a href="#slide-8" style="color:var(--dark);font-weight:700;">S.6</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+      </table>
+
+      <!-- PRESTATION ORALE -->
+      <div style="background:var(--dark);color:var(--yellow);font-size:8pt;font-weight:800;padding:5px 10px;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase;">
+        PRESTATION ORALE
+      </div>
+      <table style="font-size:7.8pt;margin-bottom:10px;">
+        <tr><th style="width:26px;">#</th><th>Critère</th><th style="width:90px;">Preuve clé</th><th style="width:34px;">Slide</th><th style="width:22px;">✓</th></tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C13</td>
+          <td>Démonstration technique en conditions réelles</td>
+          <td>CI live · Ticketing live · App Docker localhost:8080</td>
+          <td style="text-align:center;"><a href="#slide-15" style="color:var(--dark);font-weight:700;">S.14</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--dark);">C14</td>
+          <td>Organisation et bilan du projet</td>
+          <td>Métriques récapitulatives · couverture 14/14 critères</td>
+          <td style="text-align:center;"><a href="#slide-16" style="color:var(--dark);font-weight:700;">S.15</a></td>
+          <td style="text-align:center;color:#155724;font-weight:700;">✅</td>
+        </tr>
+      </table>
+
+      <!-- RÉCAP SCORE -->
+      <div style="background:var(--light);border-left:4px solid var(--yellow);padding:10px 12px;">
+        <div style="font-size:8.5pt;font-weight:700;color:var(--dark);margin-bottom:6px;">Bilan de couverture</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+          <div style="background:var(--dark);color:var(--white);padding:8px;text-align:center;">
+            <span style="font-size:18pt;font-weight:900;color:var(--yellow);display:block;line-height:1;">14/14</span>
+            <span style="font-size:7pt;color:var(--gray);">Critères couverts</span>
+          </div>
+          <div style="background:var(--dark);color:var(--white);padding:8px;text-align:center;">
+            <span style="font-size:18pt;font-weight:900;color:var(--yellow);display:block;line-height:1;">100%</span>
+            <span style="font-size:7pt;color:var(--gray);">Couverture grille</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">·</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 3 — CONTEXTE ══ -->
+<div class="slide" id="slide-3">
+  <div class="slide-header">
+    <h2>Contexte &amp; Enjeux</h2>
+    <span class="grille-badge">Grille : Cohérence avec le contexte</span>
+    <span class="slide-num-badge">1/15</span>
+  </div>
+  <div class="slide-body two-col">
+    <div class="col">
+      <h3>Le projet CESIZen</h3>
+      <p>Plateforme web de bien-être mental développée pour un <strong>Ministère fictif</strong> dans le cadre du CDA CESI.</p>
+      <div class="card">
+        <h4>Fonctionnalités</h4>
+        <ul>
+          <li>Exercices de respiration guidés (3 prédéfinis + personnalisable)</li>
+          <li>Pages d'information santé mentale</li>
+          <li>Espace personnel avec historique de sessions</li>
+          <li>Back-office d'administration</li>
+          <li>API REST avec authentification par token</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <h3>Objectif Bloc 3 — INFCDAAL3</h3>
+      <p>Déployer, maintenir et sécuriser une application web en conditions professionnelles :</p>
+      <ul>
+        <li><strong>Déploiement</strong> : Docker · CI/CD · rollback · environnements</li>
+        <li><strong>Sécurisation</strong> : OWASP Top 10 · matrice P×I · gestion de crise</li>
+        <li><strong>Maintenance</strong> : ticketing · SLA · Dependabot · RGPD</li>
+        <li><strong>Qualité</strong> : 48 tests · Git Flow · SemVer · Conventional Commits</li>
+      </ul>
+      <div class="callout">
+        <div class="callout-title">Résultat final — Juillet 2026</div>
+        48/48 tests ✅ · CI GitHub Actions ✅ · Docker opérationnel ✅ · github.com/louisbeaujoin/cesizen
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">1</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 4 — ARCHITECTURE ══ -->
+<div class="slide" id="slide-4">
+  <div class="slide-header">
+    <h2>Architecture &amp; Stack technique</h2>
+    <span class="grille-badge">Grille : Déploiement — stack technique</span>
+    <span class="slide-num-badge">2/15</span>
+  </div>
+  <div class="slide-body">
+    <table>
+      <tr><th>Couche</th><th>Technologie</th><th>Version</th><th>Rôle</th></tr>
+      <tr><td>Framework</td><td>Laravel</td><td>13</td><td>MVC, routing, ORM Eloquent, auth, middleware</td></tr>
+      <tr><td>Langage</td><td>PHP</td><td>8.3</td><td>Backend — PHP-FPM en production</td></tr>
+      <tr><td>CSS / Build</td><td>Tailwind CSS + Vite</td><td>4 / 7</td><td>Utilitaires CSS · Hot reload DEV · Bundle PROD</td></tr>
+      <tr><td>Base de données</td><td>MySQL</td><td>8.0</td><td>Données persistantes · migrations Eloquent</td></tr>
+      <tr><td>Tests</td><td>Pest</td><td>4.x</td><td>BDD-style · 48 tests · SQLite in-memory (CI)</td></tr>
+      <tr><td>Serveur TEST</td><td>Apache (Docker)</td><td>2.4</td><td>Port 8080 · mod_rewrite · image build local</td></tr>
+      <tr><td>CI/CD</td><td>GitHub Actions</td><td>—</td><td>2 jobs séquentiels : tests → docker build</td></tr>
+    </table>
+    <div class="flow" style="margin-top: 14px;">
+      <div class="flow-step">Requête HTTP</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Apache / Nginx</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Laravel Middleware</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Controller</div><div class="flow-arrow">→</div>
+      <div class="flow-step">Model / Eloquent</div><div class="flow-arrow">→</div>
+      <div class="flow-step">MySQL</div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">2</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 5 — ENVIRONNEMENTS ══ -->
+<div class="slide" id="slide-5">
+  <div class="slide-header">
+    <h2>Environnements DEV / TEST / PROD</h2>
+    <span class="grille-badge">Grille : Déploiement — plan complet</span>
+    <span class="slide-num-badge">3/15</span>
+  </div>
+  <div class="slide-body">
+    <table>
+      <tr><th>Critère</th><th>DEV (WAMP local)</th><th>TEST (Docker)</th><th>PROD (théorique)</th></tr>
+      <tr><td>Démarrage</td><td><code>composer dev</code></td><td><code>docker compose up --build</code></td><td>Pipeline CD automatisé</td></tr>
+      <tr><td>Port</td><td>8000</td><td><strong>8080</strong></td><td>443 (HTTPS — Let's Encrypt)</td></tr>
+      <tr><td>Base de données</td><td>MySQL WAMP</td><td>MySQL 8 container</td><td>MySQL managé (RDS)</td></tr>
+      <tr><td>APP_DEBUG</td><td>true</td><td><strong>false</strong></td><td>false</td></tr>
+      <tr><td>Assets Vite</td><td>Hot reload</td><td>Compilés dans l'image</td><td>Compilés + CDN</td></tr>
+      <tr><td>Ressources min.</td><td>4 Go RAM</td><td>4 Go RAM · 3 Go disque</td><td>2 vCPU · 4 Go · 50 Go SSD</td></tr>
+      <tr><td>Rollback</td><td>—</td><td>Volume drop + rebuild</td><td>git revert + mysqldump</td></tr>
+    </table>
+    <p style="margin-top:10px;color:var(--gray);font-size:8.5pt;"><em>L'environnement TEST Docker est celui réellement déployé et configuré dans ce projet (port 8080, données démo disponibles).</em></p>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">3</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 6 — DOCKER ══ -->
+<div class="slide" id="slide-6">
+  <div class="slide-header">
+    <h2>Infrastructure Docker</h2>
+    <span class="grille-badge">Grille : Déploiement — environnement configuré</span>
+    <span class="slide-num-badge">4/15</span>
+  </div>
+  <div class="slide-body two-col">
+    <div class="col">
+      <h3>2 services — docker-compose.yml</h3>
+      <div class="card">
+        <h4>Service <code>app</code></h4>
+        <ul>
+          <li>Image : build local (PHP 8.3 Apache + Node 20)</li>
+          <li>Port : <strong>8080 → 80</strong></li>
+          <li>Entrypoint : <code>entrypoint.sh</code></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Service <code>db</code></h4>
+        <ul>
+          <li>Image : <code>mysql:8.0</code></li>
+          <li>Port : non exposé (réseau interne)</li>
+          <li>Healthcheck : MySQL prêt avant l'app</li>
+        </ul>
+      </div>
+      <div class="callout" style="margin-top:8px;">
+        <div class="callout-title">Données démo — http://localhost:8080</div>
+        admin@cesizen.fr · user@cesizen.fr / password
+      </div>
+    </div>
+    <div class="col">
+      <h3>entrypoint.sh — démarrage automatique</h3>
+      <pre><code># .env absent → copie le modèle (secrets hors image)
+[ ! -f .env ] && cp .env.example .env
+
+# Génère la clé applicative
+[ -z "$APP_KEY" ] && php artisan key:generate --force
+
+# Attend MySQL puis migre
+until php artisan migrate --force; do
+  sleep 3
+done
+
+# Seeder si demandé
+if [ "${DB_SEED:-false}" = "true" ]; then
+  php artisan db:seed --force
+fi
+exec apache2-foreground</code></pre>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">4</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 7 — CI/CD ══ -->
+<div class="slide" id="slide-7">
+  <div class="slide-header">
+    <h2>Pipeline CI/CD — GitHub Actions</h2>
+    <span class="grille-badge">Grille : Déploiement — automatisation</span>
+    <span class="slide-num-badge">5/15</span>
+  </div>
+  <div class="slide-body">
+    <div class="flow" style="justify-content: center; margin-bottom: 16px; gap: 12px;">
+      <div class="flow-step" style="background:#1D7A1D;padding:10px 18px;">git push</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="padding:10px 18px;">Job : <strong>tests</strong><br><small style="color:var(--yellow);font-size:7pt;">PHP 8.3 · Pest · 48 tests</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="background:#7A1D1D;padding:10px 18px;"><strong>needs: tests</strong><br><small style="font-size:7pt;color:var(--yellow);">critère go/no-go</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="padding:10px 18px;">Job : <strong>docker</strong><br><small style="color:var(--yellow);font-size:7pt;">Build image</small></div>
+    </div>
+    <table>
+      <tr><th>Job</th><th>Déclencheur</th><th>Étapes principales</th><th>Résultat</th></tr>
+      <tr><td><strong>tests</strong></td><td>Push main / develop</td><td>Setup PHP 8.3 · Composer · SQLite · <code>php artisan test</code></td><td><span class="badge green">48/48 tests ✅</span></td></tr>
+      <tr><td><strong>docker</strong></td><td><code>needs: tests</code> seulement</td><td><code>docker build -t cesizen-app .</code></td><td><span class="badge green">Image buildée ✅</span></td></tr>
+    </table>
+    <div class="callout" style="margin-top: 12px;">
+      <div class="callout-title">Dernière exécution : ✅ success — Juillet 2026 — ~1 min 44s</div>
+      Si un test échoue → job docker annulé automatiquement. Zéro code cassé ne peut atteindre l'environnement TEST.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">5</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 8 — TESTS ══ -->
+<div class="slide" id="slide-8">
+  <div class="slide-header">
+    <h2>Tests automatisés — 48 tests · 122 assertions</h2>
+    <span class="grille-badge">Grille : Tests automatisés</span>
+    <span class="slide-num-badge">6/15</span>
+  </div>
+  <div class="slide-body two-col">
+    <div class="col">
+      <div class="stats-row" style="grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div class="stat"><span class="val">48</span><span class="lbl">Tests passés</span></div>
+        <div class="stat"><span class="val">122</span><span class="lbl">Assertions</span></div>
+        <div class="stat"><span class="val">2.5s</span><span class="lbl">Durée</span></div>
+        <div class="stat"><span class="val">0</span><span class="lbl">Échoués</span></div>
+      </div>
+      <div class="callout" style="margin-top:10px;">
+        <div class="callout-title">SQLite in-memory en CI</div>
+        Pas de MySQL requis en CI — tests rapides et isolés.
+      </div>
+    </div>
+    <div class="col">
+      <h3>Répartition des suites</h3>
+      <table>
+        <tr><th>Suite</th><th>Tests</th></tr>
+        <tr><td>Unit — Modèles (User, Breathing, Info)</td><td>9</td></tr>
+        <tr><td>Feature — Auth (connexion, rôles, profil)</td><td>13</td></tr>
+        <tr><td>Feature — Respiration (CRUD, sessions)</td><td>12</td></tr>
+        <tr><td>Feature — Information (pages, accès)</td><td>6</td></tr>
+        <tr><td><strong>Feature — Sécurité</strong> (headers, throttle, XSS, CSP)</td><td><strong>4</strong></td></tr>
+        <tr><td>Examples (sanity checks)</td><td>4</td></tr>
+        <tr><td><strong>TOTAL</strong></td><td><strong>48</strong></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">6</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 9 — MATRICE CRITICITÉ ══ -->
+<div class="slide" id="slide-9">
+  <div class="slide-header">
+    <h2>Plan de sécurisation — Matrice de criticité (P × I)</h2>
+    <span class="grille-badge">Grille : Sécurité — risques identifiés</span>
+    <span class="slide-num-badge">7/15</span>
+  </div>
+  <div class="slide-body">
+    <p style="font-size:8.5pt;margin-bottom:8px;"><strong>Méthode : Criticité = Probabilité (1–5) × Impact (1–5)</strong> · Score &gt;15 = Critique · 10–15 = Élevé · 5–9 = Moyen · &lt;5 = Faible</p>
+    <table style="font-size:8pt;">
+      <tr><th>#</th><th>Vulnérabilité</th><th>Réf.</th><th>P</th><th>I</th><th>Score</th><th>Niveau</th><th>Action implémentée</th></tr>
+      <tr><td>V01</td><td>Brute-force /connexion</td><td>A07</td><td>4</td><td>4</td><td><strong>16</strong></td><td class="crit-critique">CRITIQUE</td><td>throttle:5,1 → HTTP 429 ✓</td></tr>
+      <tr><td>V02</td><td>Exposition secrets .env</td><td>A05</td><td>3</td><td>5</td><td><strong>15</strong></td><td class="crit-eleve">ÉLEVÉ</td><td>.gitignore + .dockerignore ✓</td></tr>
+      <tr><td>V03</td><td>Mode debug production</td><td>A05</td><td>3</td><td>4</td><td><strong>12</strong></td><td class="crit-eleve">ÉLEVÉ</td><td>APP_DEBUG=false ✓</td></tr>
+      <tr><td>V04</td><td>Injection XSS</td><td>A03</td><td>3</td><td>4</td><td><strong>12</strong></td><td class="crit-eleve">ÉLEVÉ</td><td>cast (int) + Blade + CSP ✓</td></tr>
+      <tr><td>V05</td><td>Mots de passe faibles</td><td>A02</td><td>3</td><td>4</td><td><strong>12</strong></td><td class="crit-eleve">ÉLEVÉ</td><td>bcrypt 12 rounds ✓</td></tr>
+      <tr><td>V06</td><td>Injection SQL</td><td>A03</td><td>2</td><td>5</td><td><strong>10</strong></td><td class="crit-eleve">ÉLEVÉ</td><td>Eloquent ORM ✓</td></tr>
+      <tr><td>V07</td><td>Accès routes admin</td><td>A01</td><td>2</td><td>5</td><td><strong>10</strong></td><td class="crit-eleve">ÉLEVÉ</td><td>Middleware auth + rôles ✓</td></tr>
+      <tr><td>V08</td><td>CSRF</td><td>A01</td><td>3</td><td>3</td><td><strong>9</strong></td><td class="crit-moyen">MOYEN</td><td>@csrf token ✓</td></tr>
+      <tr><td>V09–12</td><td>Session / Clickjack / MIME / CSP</td><td>A05/A07</td><td>2</td><td>2–4</td><td>4–8</td><td class="crit-moyen">FAIBLE–MOY.</td><td>5 headers HTTP · CSP ✓</td></tr>
+    </table>
+    <p style="font-size:8pt;margin-top:7px;color:#155724;font-weight:700;">✅ 12/12 vulnérabilités traitées — couverture 100% (grille : 75% minimum)</p>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">7</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 10 — PLAN SÉCURISATION ══ -->
+<div class="slide" id="slide-10">
+  <div class="slide-header">
+    <h2>Plan de sécurisation : prévention et chiffrement</h2>
+    <span class="grille-badge">Grille : Sécurité — plan complet</span>
+    <span class="slide-num-badge">8/15</span>
+  </div>
+  <div class="slide-body two-col">
+    <div class="col">
+      <h3>Prévention des risques</h3>
+      <ul>
+        <li><strong>SecurityHeadersMiddleware</strong> : 5 en-têtes HTTP (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)</li>
+        <li><strong>Throttle 5,1</strong> : blocage brute-force → HTTP 429</li>
+        <li><strong>Cast (int) XSS</strong> : paramètres URL dans BreathingController</li>
+        <li><strong>Eloquent ORM</strong> : requêtes préparées PDO (SQL injection)</li>
+        <li><strong>@csrf</strong> : token sur tous les formulaires POST</li>
+        <li><strong>Middleware auth + rôles</strong> : admin vs user</li>
+        <li><strong>APP_DEBUG=false</strong> : aucune trace en production</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Solutions de chiffrement</h3>
+      <table style="font-size:8pt;">
+        <tr><th>Donnée</th><th>Solution</th></tr>
+        <tr><td>Mots de passe</td><td>bcrypt 12 rounds (irréversible)</td></tr>
+        <tr><td>Sessions &amp; cookies</td><td>AES-256-CBC via APP_KEY</td></tr>
+        <tr><td>Données en transit (PROD)</td><td>TLS 1.3 — HTTPS</td></tr>
+        <tr><td>Clé applicative</td><td>APP_KEY 32 octets — hors git</td></tr>
+        <tr><td>Tokens API</td><td>Hash SHA-256 en base</td></tr>
+      </table>
+      <div class="callout" style="margin-top:8px;">
+        <div class="callout-title">Contenus tiers bloqués par CSP</div>
+        <code style="font-size:7pt;">default-src 'self' ; object-src 'none' ; frame-ancestors 'none'</code>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">8</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 10b — TESTS SÉCURITÉ ══ -->
+<div class="slide" id="slide-10b">
+  <div class="slide-header">
+    <h2>Tests de sécurité automatisés</h2>
+    <span class="grille-badge">Grille : Sécurité — qualité du code</span>
+    <span class="slide-num-badge">9/15</span>
+  </div>
+  <div class="slide-body">
+    <p style="margin-bottom:8px;">4 tests dans <code>tests/Feature/SecurityTest.php</code> prouvent que les mécanismes fonctionnent en CI :</p>
+    <pre><code>// Test 1 — 5 en-têtes HTTP de sécurité sur toutes les pages (dont CSP)
+test('security headers are present on home page', function () {
+    $this->get('/')->assertHeader('X-Content-Type-Options', 'nosniff')
+                   ->assertHeader('Content-Security-Policy');
+});
+
+// Test 2 — CSP bloque les ressources externes
+test('content security policy blocks external sources', function () {
+    $csp = $this->get('/')->headers->get('Content-Security-Policy');
+    expect($csp)->toContain("default-src 'self'")->toContain("object-src 'none'");
+});
+
+// Test 3 — HTTP 429 après 5 tentatives de connexion
+test('throttle middleware blocks after 5 login attempts', function () {
+    for ($i = 0; $i < 5; $i++) { $this->post('/connexion', [...]); }
+    $this->post('/connexion', [...])->assertStatus(429);
+});
+
+// Test 4 — XSS neutralisé par cast (int) dans BreathingController
+test('xss cast int protection on breathing page', function () {
+    $this->get('/respiration?inspiration=5%3Balert(1)%2F%2F')
+         ->assertStatus(200)->assertDontSee('alert(1)', false);
+});</code></pre>
+    <div class="callout"><div class="callout-title">Vérification confirmée</div>
+    Throttle testé sur Docker : HTTP 302×5 → HTTP 429 ✅ · En-têtes confirmés via Invoke-WebRequest ✅</div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">9</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 11 — GESTION DE CRISE & RGPD ══ -->
+<div class="slide" id="slide-11">
+  <div class="slide-header">
+    <h2>Gestion de crise &amp; Conformité RGPD</h2>
+    <span class="grille-badge">Grille : Sécurité — gestion de crise / RGPD</span>
+    <span class="slide-num-badge">10/15</span>
+  </div>
+  <div class="slide-body two-col">
+    <div class="col">
+      <h3>Processus de réponse à incident</h3>
+      <table style="font-size:8pt;">
+        <tr><th>Délai</th><th>Action</th></tr>
+        <tr><td><strong>H+0</strong></td><td>Détection — logs, alertes Dependabot, ticket GitHub</td></tr>
+        <tr><td>H+15 min</td><td>Classification P1/P2/P3 · ticket ouvert</td></tr>
+        <tr><td>H+30 min</td><td>Escalade selon matrice (Direction + DPO si P1)</td></tr>
+        <tr><td>H+1h</td><td>Confinement — maintenance, révocation sessions</td></tr>
+        <tr><td>H+3h</td><td>Correction — branche hotfix/ → PR → merge → tag SemVer</td></tr>
+        <tr><td><strong>&lt;72h</strong></td><td>Notification CNIL (Art. 33) + email utilisateurs (Art. 34)</td></tr>
+        <tr><td>J+7</td><td>Post-mortem documenté dans GitHub Issue</td></tr>
+      </table>
+    </div>
+    <div class="col">
+      <h3>Conformité RGPD</h3>
+      <table style="font-size:8pt;">
+        <tr><th>Article</th><th>Mise en œuvre</th></tr>
+        <tr><td>Art. 5 — Minimisation</td><td>Nom, email, MDP hashé seulement</td></tr>
+        <tr><td>Art. 15 — Accès</td><td>Profil visible dans l'espace personnel</td></tr>
+        <tr><td>Art. 16 — Rectification</td><td>Modification depuis le profil</td></tr>
+        <tr><td>Art. 17 — Effacement</td><td>Suppression compte par admin</td></tr>
+        <tr><td>Art. 32 — Sécurité</td><td>bcrypt + HTTPS + headers + secrets hors git</td></tr>
+        <tr><td>Art. 33/34 — Violation</td><td>CNIL &lt;72h · email utilisateurs &lt;72h</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">10</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 12 — TICKETING ══ -->
+<div class="slide" id="slide-12">
+  <div class="slide-header">
+    <h2>Gestion des évolutions et des incidents</h2>
+    <span class="grille-badge">Grille : Maintenance — outil d'évolutions</span>
+    <span class="slide-num-badge">11/15</span>
+  </div>
+  <div class="slide-body two-col">
+    <div class="col">
+      <h3>GitHub Issues + Projects</h3>
+      <div class="card">
+        <h4>Board Kanban — 4 colonnes</h4>
+        <ul>
+          <li>Backlog → En cours → En revue → Terminé</li>
+          <li>Templates pré-remplis (bug + feature)</li>
+          <li>Labels : bug, amélioration, bloquant-critique, sécurité</li>
+          <li>Fermeture automatique (<code>Fixes #13</code>)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Dependabot — veille automatique</h4>
+        <ul>
+          <li>Composer + npm : vérification hebdomadaire</li>
+          <li>GitHub Actions : vérification mensuelle</li>
+          <li>PRs automatiques + validation CI avant merge</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <h3>SLA par criticité</h3>
+      <table>
+        <tr><th>Niveau</th><th>Prise en compte</th><th>Correction</th></tr>
+        <tr><td><span class="badge red">Bloquant critique</span></td><td>&lt; 1h</td><td>&lt; 3h ouvrées</td></tr>
+        <tr><td><span class="badge orange">Bloquant majeur</span></td><td>&lt; 4h</td><td>&lt; 24h ouvrées</td></tr>
+        <tr><td><span class="badge blue">Mineur</span></td><td>&lt; 48h</td><td>Sprint suivant</td></tr>
+      </table>
+      <div class="callout" style="margin-top:10px;">
+        <div class="callout-title">Exemple bloquant critique</div>
+        Erreur 500 sur /connexion → prise en compte immédiate, rollback si nécessaire, correctif &lt;3h ouvrées.
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">11</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 13 — ROLLBACK ══ -->
+<div class="slide" id="slide-13">
+  <div class="slide-header">
+    <h2>Procédure de Rollback &amp; Résilience</h2>
+    <span class="grille-badge">Grille : Déploiement — procédure rollback</span>
+    <span class="slide-num-badge">12/15</span>
+  </div>
+  <div class="slide-body two-col">
+    <div class="col">
+      <h3>Rollback code — Git</h3>
+      <pre><code># Annuler le commit fautif (préserve l'historique)
+git revert &lt;hash&gt;
+git push origin main
+
+# Revenir à un tag stable
+git checkout v1.0.0</code></pre>
+      <h3>Rollback base de données</h3>
+      <pre><code># Annuler la dernière migration
+php artisan migrate:rollback
+
+# Restaurer depuis backup
+mysql -u root -p cesizen &lt; backup.sql</code></pre>
+    </div>
+    <div class="col">
+      <h3>Critères de déclenchement</h3>
+      <table>
+        <tr><th>Scénario</th><th>Délai</th></tr>
+        <tr><td>Erreur 500 en PROD</td><td>Immédiat</td></tr>
+        <tr><td>Régression majeure</td><td>&lt; 30 min</td></tr>
+        <tr><td>Corruption données</td><td>Immédiat</td></tr>
+        <tr><td>Vulnérabilité critique</td><td>Immédiat + patch</td></tr>
+      </table>
+      <div class="callout" style="margin-top:10px;">
+        <div class="callout-title">Bonne pratique</div>
+        mysqldump avant migration · Tags SemVer sur chaque release · <code>git revert</code> préféré au <code>reset --hard</code>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">12</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 14 — GIT FLOW ══ -->
+<div class="slide" id="slide-14">
+  <div class="slide-header">
+    <h2>Gestion des versions — Git Flow + SemVer</h2>
+    <span class="grille-badge">Grille : Maintenance — outil de versions</span>
+    <span class="slide-num-badge">13/15</span>
+  </div>
+  <div class="slide-body two-col">
+    <div class="col">
+      <h3>Architecture des branches</h3>
+      <pre><code>main  ←─── PR seulement ─── tag v1.0.0
+  │
+  └── develop  ←─ intégration continue
+        │
+        └── feature/*  ←─ fonctionnalité isolée</code></pre>
+      <h3>Flux de livraison</h3>
+      <div class="flow" style="flex-wrap: wrap;">
+        <div class="flow-step" style="font-size:8pt;">feature/*</div><div class="flow-arrow">→</div>
+        <div class="flow-step" style="font-size:8pt;">PR → develop</div><div class="flow-arrow">→</div>
+        <div class="flow-step" style="font-size:8pt;">PR → main</div><div class="flow-arrow">→</div>
+        <div class="flow-step" style="background:#7A1D1D;font-size:8pt;">tag vX.Y.Z</div>
+      </div>
+    </div>
+    <div class="col">
+      <h3>Semantic Versioning</h3>
+      <table>
+        <tr><th>Format</th><th>Signification</th></tr>
+        <tr><td><code>v1.0.0</code></td><td>Première version stable</td></tr>
+        <tr><td><code>v1.1.0</code></td><td>Nouvelle fonctionnalité (MINOR)</td></tr>
+        <tr><td><code>v1.0.1</code></td><td>Correctif de bug (PATCH)</td></tr>
+        <tr><td><code>v2.0.0</code></td><td>Changement cassant (MAJOR)</td></tr>
+      </table>
+      <h3>Conventional Commits</h3>
+      <pre><code>feat: nouvelle fonctionnalité
+fix: correction de bug
+docs: documentation
+test: ajout de tests
+chore: maintenance</code></pre>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">13</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 15 — DÉMO ══ -->
+<div class="slide" id="slide-15">
+  <div class="slide-header">
+    <h2>Démonstration live</h2>
+    <span class="grille-badge">Grille : Prestation orale — démonstration</span>
+    <span class="slide-num-badge">14/15</span>
+  </div>
+  <div class="slide-body">
+    <div class="stats-row">
+      <div class="stat"><span class="val">A</span><span class="lbl">Versioning + CI/CD<br>3 min</span></div>
+      <div class="stat"><span class="val">B</span><span class="lbl">Ticketing GitHub<br>2 min</span></div>
+      <div class="stat"><span class="val">C</span><span class="lbl">App Docker live<br>1 min</span></div>
+      <div class="stat"><span class="val">6</span><span class="lbl">Minutes totales</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+      <div class="card"><h4>A — GitHub Actions</h4><ul><li>Historique des commits</li><li>Dernier run CI ✅</li><li>2 jobs : tests → docker</li><li>Branches main / develop</li></ul></div>
+      <div class="card"><h4>B — Ticketing</h4><ul><li>Board Kanban 4 colonnes</li><li>Template bug rempli</li><li>Labels criticité</li><li>PRs Dependabot</li></ul></div>
+      <div class="card"><h4>C — App live</h4><ul><li>http://localhost:8080</li><li>Connexion admin (DevTools → en-têtes sécurité)</li><li>Exercice de respiration</li><li>Back-office administration</li></ul></div>
+      <div class="card"><h4>Si problème technique</h4><ul><li><code>docker compose restart app</code></li><li><code>docker compose down -v &amp;&amp; up --build</code></li></ul></div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">14</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 16 — MÉTRIQUES & CONCLUSION ══ -->
+<div class="slide" id="slide-16">
+  <div class="slide-header">
+    <h2>Métriques &amp; Résultats</h2>
+    <span class="grille-badge">Grille : Organisation &amp; bilan</span>
+    <span class="slide-num-badge">15/15</span>
+  </div>
+  <div class="slide-body">
+    <div class="stats-row" style="margin-bottom: 14px;">
+      <div class="stat"><span class="val">48</span><span class="lbl">Tests passés<br>(0 échoué)</span></div>
+      <div class="stat"><span class="val">122</span><span class="lbl">Assertions<br>vérifiées</span></div>
+      <div class="stat"><span class="val">12</span><span class="lbl">Vulnérabilités<br>P×I analysées</span></div>
+      <div class="stat"><span class="val">2</span><span class="lbl">Jobs CI/CD<br>GitHub Actions</span></div>
+    </div>
+    <table style="font-size:8.5pt;">
+      <tr><th>Critère grille</th><th>Objectif</th><th>Résultat</th></tr>
+      <tr><td>Déploiement</td><td>Environnement configuré + plan complet</td><td><span class="badge green">✅ Docker 8080 · 3 env · CI/CD 2 jobs</span></td></tr>
+      <tr><td>Sécurité</td><td>OWASP + calculs criticité + plan</td><td><span class="badge green">✅ 12 vulnérabilités P×I · 5 headers · CSP</span></td></tr>
+      <tr><td>Gestion de crise</td><td>Plan formalisé + RGPD</td><td><span class="badge green">✅ 7 étapes · escalade P1/P2/P3 · CNIL 72h</span></td></tr>
+      <tr><td>Maintenance</td><td>Outil + SLA + veille</td><td><span class="badge green">✅ GitHub Issues · SLA · Dependabot</span></td></tr>
+      <tr><td>Tests automatisés</td><td>Suite CI passante</td><td><span class="badge green">✅ 48/48 · 122 assertions · 0 échec</span></td></tr>
+      <tr><td>Versioning</td><td>Outil + procédure</td><td><span class="badge green">✅ Git Flow · SemVer v1.0.0 · Conventional Commits</span></td></tr>
+    </table>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">CESIZen — Soutenance INFCDAAL3 «Déployer et sécuriser les applications»</span>
+    <span class="footer-num">15</span>
+  </div>
+</div>
+
+<!-- ══ SLIDE 17 — CONCLUSION ══ -->
+<div class="slide slide-final" id="slide-17">
+  <div class="yellow-bar"></div>
+  <h2>CESI<em>Zen</em> — Bloc 3</h2>
+  <p class="subtitle">Une application déployée, testée, sécurisée et maintenue<br>avec une chaîne d'outils professionnelle cohérente.</p>
+  <div class="checks">
+    <div class="check"><div class="bullet"></div><span>48 tests automatisés · CI GitHub Actions · 2 jobs séquentiels · 0 échec</span></div>
+    <div class="check"><div class="bullet"></div><span>Docker opérationnel · http://localhost:8080 · données démo incluses</span></div>
+    <div class="check"><div class="bullet"></div><span>12 vulnérabilités P×I · 5 headers HTTP · CSP · throttle · XSS · gestion de crise 7 étapes</span></div>
+    <div class="check"><div class="bullet"></div><span>Ticketing GitHub · SLA formalisé · Dependabot hebdomadaire · rollback documenté</span></div>
+    <div class="check"><div class="bullet"></div><span>Git Flow · SemVer v1.0.0 · Conventional Commits · PR develop → main</span></div>
+    <div class="check"><div class="bullet"></div><span>RGPD Art. 5, 15, 16, 17, 32, 33, 34 · notification CNIL &lt;72h</span></div>
+  </div>
+  <div class="url">github.com/louisbeaujoin/cesizen · Louis Beaujoin · CDA CESI Bloc 3</div>
+</div>
+
+</body>
+</html>
