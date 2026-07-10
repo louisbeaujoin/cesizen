@@ -13,6 +13,14 @@ use App\Http\Controllers\Admin\BreathingExerciseController;
 // Page d'accueil
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Téléchargement de l'application mobile Android
+Route::get('/telecharger-app', function () {
+    $path = public_path('downloads/cesizen.apk');
+    return response()->download($path, 'CESIZen.apk', [
+        'Content-Type' => 'application/vnd.android.package-archive',
+    ]);
+})->name('app.download');
+
 // Routes accessibles uniquement aux visiteurs non connectés
 Route::middleware('guest')->group(function () {
     Route::get('/connexion', [AuthController::class, 'showLogin'])->name('login');

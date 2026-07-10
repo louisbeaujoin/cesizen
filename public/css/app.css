@@ -445,3 +445,65 @@ hr {
         flex-direction: column;
     }
 }
+
+/* === Téléchargement application mobile === */
+.app-download {
+    margin: 40px 0;
+}
+
+.app-download-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.app-download-icon {
+    font-size: 56px;
+    flex-shrink: 0;
+}
+
+.app-download-content h2 {
+    color: #ffffff;
+    margin: 0 0 8px 0;
+    font-size: 1.4rem;
+}
+
+.app-download-content p {
+    color: #cbd5e1;
+    margin: 0 0 16px 0;
+}
+
+.btn-download {
+    display: inline-block;
+    background: #facc15;
+    color: #1a1a2e;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.btn-download:hover {
+    background: #eab308;
+    color: #1a1a2e;
+}
+
+.app-download-note {
+    color: #94a3b8;
+    font-size: 0.8rem;
+    margin: 10px 0 0 0 !important;
+}
+
+@media (max-width: 600px) {
+    .app-download-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
