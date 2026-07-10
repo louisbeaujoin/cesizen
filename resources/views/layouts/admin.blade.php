@@ -22,6 +22,7 @@
                 <li><a href="{{ route('admin.users.index') }}">Utilisateurs</a></li>
                 <li><a href="{{ route('admin.information.index') }}">Informations</a></li>
                 <li><a href="{{ route('admin.breathing.index') }}">Respiration</a></li>
+                <li><a href="{{ route('admin.tickets.index') }}">Tickets</a></li>
                 {{-- Lien de retour vers le site public --}}
                 <li><a href="{{ route('home') }}">Voir le site</a></li>
                 <li>

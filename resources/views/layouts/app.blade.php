@@ -19,6 +19,7 @@
                 <li><a href="{{ route('home') }}">Accueil</a></li>
                 <li><a href="{{ route('information.index') }}">Informations</a></li>
                 <li><a href="{{ route('breathing.index') }}">Respiration</a></li>
+                <li><a href="{{ route('tickets.create') }}">Support</a></li>
                 {{-- Liens affichés uniquement si l'utilisateur est connecté --}}
                 @auth
                     {{-- Lien admin visible uniquement pour les administrateurs --}}
