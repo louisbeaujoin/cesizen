@@ -36,6 +36,21 @@
         @endguest
     </section>
 
+    {{-- Téléchargement de l'application mobile --}}
+    <section class="app-download">
+        <div class="app-download-card">
+            <div class="app-download-icon">📱</div>
+            <div class="app-download-content">
+                <h2>Application mobile Android</h2>
+                <p>Emportez CESIZen partout avec vous. Téléchargez l'application sur votre smartphone Android.</p>
+                <a href="{{ route('app.download') }}" class="btn btn-download">
+                    ⬇ Télécharger l'APK Android
+                </a>
+                <p class="app-download-note">Version debug — Android 8.0 minimum requis</p>
+            </div>
+        </div>
+    </section>
+
     {{-- Aperçu des 3 premières pages d'information publiées --}}
     @if($pages->isNotEmpty())
     <section class="info-preview">
