@@ -5,10 +5,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\BreathingController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\InformationPageController;
 use App\Http\Controllers\Admin\BreathingExerciseController;
+use App\Http\Controllers\Admin\TicketAdminController;
 
 // Page d'accueil
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -46,6 +48,11 @@ Route::get('/respiration', [BreathingController::class, 'index'])->name('breathi
 Route::get('/respiration/exercice/{exercise?}', [BreathingController::class, 'exercise'])->name('breathing.exercise');
 Route::post('/respiration/session', [BreathingController::class, 'saveSession'])->name('breathing.session.save')->middleware('auth');
 
+// Tickets support (accessibles à tous)
+Route::get('/ticket', [TicketController::class, 'create'])->name('tickets.create');
+Route::post('/ticket', [TicketController::class, 'store'])->name('tickets.store')->middleware('throttle:5,1');
+Route::get('/ticket/confirmation', [TicketController::class, 'confirmation'])->name('tickets.confirmation');
+
 // Routes admin (nécessitent d'être connecté et d'avoir le rôle admin)
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -74,4 +81,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/respiration/{exercise}/modifier', [BreathingExerciseController::class, 'edit'])->name('breathing.edit');
     Route::put('/respiration/{exercise}', [BreathingExerciseController::class, 'update'])->name('breathing.update');
     Route::delete('/respiration/{exercise}', [BreathingExerciseController::class, 'destroy'])->name('breathing.destroy');
+
+    // Gestion des tickets support
+    Route::get('/tickets', [TicketAdminController::class, 'index'])->name('tickets.index');
+    Route::get('/tickets/{ticket}', [TicketAdminController::class, 'show'])->name('tickets.show');
+    Route::patch('/tickets/{ticket}/status', [TicketAdminController::class, 'updateStatus'])->name('tickets.status');
 });

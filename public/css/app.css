@@ -507,3 +507,181 @@ hr {
         text-align: center;
     }
 }
+
+/* === Formulaire de ticket === */
+.ticket-form-wrapper {
+    max-width: 720px;
+    margin: 40px auto;
+}
+
+.ticket-intro {
+    color: #6b7280;
+    margin-bottom: 28px;
+}
+
+.ticket-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ticket-form input,
+.ticket-form select,
+.ticket-form textarea {
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.ticket-form input:focus,
+.ticket-form select:focus,
+.ticket-form textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.ticket-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.required {
+    color: #ef4444;
+}
+
+.field-error {
+    color: #ef4444;
+    font-size: 0.85rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+/* === Page de confirmation === */
+.confirmation-card {
+    max-width: 520px;
+    margin: 60px auto;
+    text-align: center;
+    padding: 48px 32px;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.confirmation-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+}
+
+.confirmation-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+/* === Admin tickets === */
+.filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid #d1d5db;
+    text-decoration: none;
+    color: #374151;
+    font-size: 0.9rem;
+    transition: all 0.15s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #1e3a5f;
+    color: #fff;
+    border-color: #1e3a5f;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-ouvert   { background: #fef3c7; color: #92400e; }
+.status-en_cours { background: #dbeafe; color: #1e40af; }
+.status-resolu   { background: #d1fae5; color: #065f46; }
+.status-ferme    { background: #f3f4f6; color: #6b7280; }
+
+.ticket-detail {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 28px;
+    max-width: 760px;
+}
+
+.ticket-meta {
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 20px;
+}
+
+.meta-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+.meta-label {
+    font-weight: 600;
+    min-width: 90px;
+    color: #6b7280;
+}
+
+.ticket-body {
+    margin-bottom: 24px;
+}
+
+.ticket-body p {
+    white-space: pre-wrap;
+    background: #f9fafb;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.status-form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-sm {
+    padding: 4px 12px;
+    font-size: 0.85rem;
+}
+
+.empty-state {
+    color: #6b7280;
+    text-align: center;
+    padding: 40px;
+}
+
+.text-muted {
+    color: #9ca3af;
+    font-size: 0.85rem;
+}
